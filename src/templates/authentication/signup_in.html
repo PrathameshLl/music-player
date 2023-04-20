@@ -1,16 +1,63 @@
 <!DOCTYPE html>
-{% load static %}
 <html lang="en">
+    {% load static %}
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>welcome</title>
-    <link rel="stylesheet" href="{% static 'tailwindcss/music_player.css' %}">
-    <link rel="stylesheet" href="{% static 'authentication/music_player/signup_in' .%}">
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="{% static 'authentication/css/signup_in.css' %}">
+	<title>Document</title>
+
+	
 </head>
 <body>
-    <h1 class="text-red-400 tp-12">hello</h1>
-
+	<div class="split-screen">
+		<div class="left">
+			<section class="copy">
+				<h1>Dive into real MUSIC</h1>
+				<p>Just blend in 1000+ songs</p>
+			</section>
+		</div>
+		<div class="right">
+			<form>
+				<section class="copy">
+					<h2>Sign Up</h2>
+					<div class="login-container">
+						<p>Already have an acount? <a href="/singin">
+							<strong>Log In</strong></a></p>
+					</div>
+				</section>
+				<div class="input-container name">
+					<label for="fname">Full Name</label>
+					<input id="fname" class="input-height" name="fname" type="text">
+				</div>
+				<div class="input-container email">
+					<label for="email">Email</label>
+					<input id="email" class="input-height" name="email" type="email">
+				</div>
+				<div class="input-container password">
+					<label for="password">Password</label>
+					<input id="password" class="input-height" name="password" placeholder="Must be atleast 6 character"
+					 type="password">
+					 <i class="far fa-eye-slash"></i>
+				</div>
+				<div class="input-container cta py">
+					<label class="checkbox-container">
+						<input type="checkbox">
+						<span class="checkmark"></span>
+						Sign Up for email updates.
+					</label>
+				</div>
+				<div>
+					<button class="signup-btn" type="submit">Sign Up</button>
+					<section class="copy legal">
+						<p><span class="small">By continuing, you agree to accept our <br> <a href="#">Privacy Policy</a>
+						 &amp; <a href="#">Terms of Service</a>.</span></p>
+					</section>
+				</div>
+			
+			</form>
+		</div>
+	</div>
 </body>
 </html>
