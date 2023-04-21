@@ -69,9 +69,7 @@ a:hover {
 .right form {
     width: 328px;
 }
-form input[type="text"],
-form input[type="email"]
-form input[type="password"] {
+form input{
     display: block;
     width: 100%;
     height: 30px;
@@ -88,15 +86,6 @@ label {
     margin-bottom: 0.5rem;
     font-size: 0.75;
 }
-.input-container.password {
-    position: relative;
-}
-.input-container.password i {
-    position: absolute;
-    top: 42px;
-    right: 16px;
-}
-
 
 
 
@@ -109,7 +98,7 @@ label {
     width: 0;
 }
 .checkbox-container {
-    display: block;
+    display: flex;
     position: relative;
     padding-left: 2rem;
     cursor: pointer;
@@ -180,7 +169,6 @@ label {
 
 .py{
    padding-top: 20px;
-   padding-bottom: 20px;
 }
 
 .copy h1{
@@ -189,4 +177,9 @@ label {
 
 .email{
    width: 100%;
+}
+
+.cta{
+    display:flex;
+    align-items: center;
 }
