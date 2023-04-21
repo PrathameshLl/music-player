@@ -11,5 +11,9 @@
 </head>
 <body>
     <h1>this is home page</h1>
+    <form action="/signout" method="get">
+        {% csrf_token %}
+        <button type="submit">signout</button>
+    </form>
 </body>
 </html>

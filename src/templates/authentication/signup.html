@@ -20,6 +20,8 @@
 		</div>
 		<div class="right">
 			<form method="post" action="/signupuser">
+
+				{% csrf_token %}
 				<section class="copy">
 					<h2>Sign Up</h2>
 					<div class="login-container">
@@ -28,8 +30,8 @@
 					</div>
 				</section>
 				<div class="input-container name">
-					<label for="fname">Full Name</label>
-					<input id="fname" class="input-height" name="fname" type="text">
+					<label for="username">Enter username </label>
+					<input id="fname" class="input-height" name="username" type="text">
 				</div>
 				<div class="input-container email">
 					<label for="email">Email</label>
