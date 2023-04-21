@@ -10,8 +10,6 @@ def auth(request):
 def signup(reqeust):
     return render(reqeust,"authentication/signup.html")
 
-
-
 def login(request):
     return render(request,"authentication/signin.html")
 
