@@ -17,6 +17,10 @@ Amplitude.init({
             "album":"Call Me By Your Name"
         },
     ],
+
+    "bindings":{
+        32: "play_pause",
+    }
 });
 
 console.log("hello world")

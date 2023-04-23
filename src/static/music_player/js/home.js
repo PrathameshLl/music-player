@@ -27,3 +27,9 @@ prevBtn.addEventListener("click",(event)=>{
         togglePlayPause(playBtn,pauseBtn);
     }
 });
+
+
+document.addEventListener("keyup",(event)=>{
+    if(event.keyCode == 32)
+        togglePlayPause(playBtn,pauseBtn);
+});
