@@ -18,21 +18,23 @@
         {% csrf_token %}
         <button type="submit">signout</button>
     </form>
-    <div id="music-controller" class="fixed bottom-0 p-4 bg-mycolor-2 w-full">
-        <div class="flex justify-around">
+    <div id="music-controller" class="fixed bottom-0  bg-mycolor-2 w-full">
+            <input type="range" class="amplitude-song-slider bg-mycolor-1 w-full h-1 absolute" step=".1" />
+        <div class="flex justify-around lg:justify-start gap-14 mx-3 my-4">
+
             <div class="song-info flex font-mono  gap-4">
                 <img id="album_cover" data-amplitude-song-info="cover_art_url"
-                    class="rounded-sm shadow-sm shadow-black object-cover w-24">
-                <div id="info">
-                    <div class="song-name font-bold text-lg">Paranoid Android</div>
-                    <div class="artist_name">Radiohead</div>
-                    <div class="album">Ok Computer</div>
+                    class="rounded-sm shadow-sm shadow-black object-contain w-16 md:w-24">
+                <div id="info shrink-0">
+                    <div data-amplitude-song-info="name" class="song-name font-bold text-sm md:text-lg"></div>
+                    <div data-amplitude-song-info="artist" class="artist_name text-xs md:text-lg"></div>
+                    <div data-amplitude-song-info="album" class="album hidden md:block"></div>
                 </div>
             </div>
             <div class="controls self-center flex gap-1">
-                <div id="prev" class="amplitude-prev">
+                <div id="prev-btn" class="amplitude-prev">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                        stroke="currentColor" class="w-12 h-12">
+                        stroke="currentColor" class="w-8 h-8">
                         <path stroke-linecap="round" stroke-linejoin="round"
                             d="M21 16.811c0 .864-.933 1.405-1.683.977l-7.108-4.062a1.125 1.125 0 010-1.953l7.108-4.062A1.125 1.125 0 0121 8.688v8.123zM11.25 16.811c0 .864-.933 1.405-1.683.977l-7.108-4.062a1.125 1.125 0 010-1.953L9.567 7.71a1.125 1.125 0 011.683.977v8.123z" />
                     </svg>
@@ -40,7 +42,7 @@
 
                 <div id="play-btn" class="amplitude-play">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                        stroke="currentColor" class="w-12 h-12">
+                        stroke="currentColor" class="w-8 h-8">
                         <path stroke-linecap="round" stroke-linejoin="round"
                             d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.348a1.125 1.125 0 010 1.971l-11.54 6.347a1.125 1.125 0 01-1.667-.985V5.653z" />
                     </svg>
@@ -48,14 +50,14 @@
 
                 <div id="pause-btn" class="hidden amplitude-pause">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                        stroke="currentColor" class="w-12 h-12">
+                        stroke="currentColor" class="w-8 h-8">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 5.25v13.5m-7.5-13.5v13.5" />
                     </svg>
                 </div>
 
-                <div id="next" class="amplitude-next">
+                <div id="next-btn" class="amplitude-next">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                        stroke="currentColor" class="w-12 h-12">
+                        stroke="currentColor" class="w-8 h-8">
                         <path stroke-linecap="round" stroke-linejoin="round"
                             d="M3 8.688c0-.864.933-1.405 1.683-.977l7.108 4.062a1.125 1.125 0 010 1.953l-7.108 4.062A1.125 1.125 0 013 16.81V8.688zM12.75 8.688c0-.864.933-1.405 1.683-.977l7.108 4.062a1.125 1.125 0 010 1.953l-7.108 4.062a1.125 1.125 0 01-1.683-.977V8.688z" />
                     </svg>
@@ -64,8 +66,8 @@
 
         </div>
     </div>
-<script src="{% static 'music_player/js/init_music.js' %}"></script>
-<script src="{% static 'music_player/js/home.js' %}"></script>
+    <script src="{% static 'music_player/js/init_music.js' %}"></script>
+    <script src="{% static 'music_player/js/home.js' %}"></script>
 </body>
 
 </html>
