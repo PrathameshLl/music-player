@@ -9,14 +9,28 @@ def auth(request):
     if request.user.is_authenticated:
         return render(request,"music_player/home.html")
     
-    return render(request,"music_player/home.html")
     return redirect("/signup")
 
 def signup(reqeust):
     return render(reqeust,"authentication/signup.html")
 
-def login_user(request):
+def login_page(request):
     return render(request,"authentication/signin.html")
+
+def login_user(reqeust):
+    if reqeust.method == "POST":
+        username = reqeust.POST["username"] 
+        password = reqeust.POST["password"]
+
+
+        user = authenticate(username=username,password=password)
+        if user is not None:
+            login(reqeust,user)
+            messages.success("login successfully")
+
+
+        return redirect("/")
+
 
 def signout(reqeust):
     logout(reqeust)
