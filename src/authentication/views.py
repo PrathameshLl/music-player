@@ -8,6 +8,7 @@ from django.contrib.auth import login , authenticate,logout
 def auth(request):
     if request.user.is_authenticated:
         return render(request,"music_player/home.html")
+    
     return redirect("/signup")
 
 def signup(reqeust):
