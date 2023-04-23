@@ -33,3 +33,20 @@ document.addEventListener("keyup",(event)=>{
     if(event.keyCode == 32)
         togglePlayPause(playBtn,pauseBtn);
 });
+
+
+song_title = document.getElementById("song-title")
+scrollWidth = song_title.scrollWidth
+
+
+window.addEventListener("load",(event)=>{
+    let prevScroll = song_title.scrollLeft
+    let scrollvalue = 1;
+    self.setInterval(()=>{
+        if(song_title.scrollLeft !== scrollWidth){
+            song_title.scrollTo(song_title.scrollLeft + scrollvalue,0);
+            if(prevScroll === song_title.scrollLeft) scrollvalue = -scrollvalue;
+            prevScroll = song_title.scrollLeft;
+        }
+    },40);
+})

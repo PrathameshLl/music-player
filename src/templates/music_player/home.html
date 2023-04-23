@@ -19,19 +19,18 @@
         <button type="submit">signout</button>
     </form>
     <div id="music-controller" class="fixed bottom-0  bg-mycolor-2 w-full">
-        <input type="range" class="amplitude-song-slider bg-mycolor-1 w-full h-1 absolute" step=".1" />
-        <div class="flex items-center gap-8  mx-3 my-4">
+        <input type="range" class="amplitude-song-slider md:hidden bg-mycolor-1 w-full h-1 absolute" step=".1" />
+        <div class="grid overflow-x-scroll grid-cols-2 md:grid-cols-3  mx-6 my-4">
 
-            <div class="song-info shrink-0  flex font-mono gap-4 ">
+            <div class="song-info flex font-mono gap-4 shrink-0 ">
                 <img id="album_cover" data-amplitude-song-info="cover_art_url" data-amplitude-main-song-info="true"
-                    class="rounded-sm shadow-sm shadow-black object-contain w-16 md:w-24">
-                <div id="info shrink-0">
-                    <div data-amplitude-song-info="name" class="song-name font-bold text-sm md:text-lg"></div>
-                    <div data-amplitude-song-info="artist" class="artist_name text-xs md:text-lg"></div>
-                    <div data-amplitude-song-info="album" class="album hidden md:block"></div>
+                    class="rounded-sm shadow-sm shadow-black object-contain w-12 md:w-16">
+                <div id="info" class="overflow-hidden">
+                    <div id="song-title" data-amplitude-song-info="name" class="song-name scrollbar-none  font-bold text-sm md:text-lg w-full overflow-scroll whitespace-nowrap"></div>
+                    <div data-amplitude-song-info="artist" class="artist_name scrollbar-none text-xs md:text-lg overflow-scroll whitespace-nowrap"></div>
                 </div>
             </div>
-            <div class="basis-full flex flex-col gap-3">
+            <div class="self-center basis-full flex flex-col gap-3">
                 <div class="controls flex justify-center items-center gap-3 ">
                     <div id="prev-btn" class="amplitude-prev">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -70,7 +69,7 @@
                 </div>
             </div>
 
-            <div class="hidden md:block extra-control shrink-0 p-3">
+            <div class="hidden md:flex items-center justify-end  extra-control shrink-0 p-3 ">
                 <input type="range" class="amplitude-volume-slider h-1" />
             </div>
         </div>
