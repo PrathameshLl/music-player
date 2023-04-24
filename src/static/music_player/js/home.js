@@ -38,7 +38,7 @@ document.addEventListener("keyup",(event)=>{
 song_title = document.getElementById("song-title")
 scrollWidth = song_title.scrollWidth
 
-
+/*
 window.addEventListener("load",(event)=>{
     let prevScroll = song_title.scrollLeft
     let scrollvalue = 1;
@@ -50,3 +50,4 @@ window.addEventListener("load",(event)=>{
         }
     },40);
 })
+*/
