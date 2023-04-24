@@ -1,13 +1,53 @@
-{% load static %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>signin page</title>
+    <head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="signin.css">
+	<title>Music player</title>
 </head>
 <body>
-   <h1>this is sign page</h1> 
+	<div class="split-screen">
+		<div class="left">
+			<section class="copy">
+				<h1>Missed Us?</h1>
+        <h2>Tune IN</h2>  
+				<p>Just blend in 1000+ songs</p>
+			</section>
+		</div>
+		<div class="right">
+			<form method="post" action="/signupuser">
+
+				
+				<section class="copy">
+					<h2>Sign In</h2>
+				</section>
+				<div class="input-container name">
+					<label for="username">Enter Username / Email </label>
+					<input id="fname" class="input-height" name="username" type="text">
+				</div>
+				
+				<div class="input-container password">
+					<label for="password">Password</label>
+					<input id="password" class="input-height" name="password" placeholder="Must be atleast 6 character"
+					 type="password">
+					 <i class="far fa-eye-slash"></i>
+				</div>
+				<div class="login-container">
+          <p>Forgot your Password? <a href="/signin">
+            <strong>Click here</strong></a></p>
+        </div>
+				<div>
+					<button class="signin-btn" type="submit">Sign In</button>
+					<section class="copy legal">
+						<p><span class="small">By continuing, you agree to accept our <br> <a href="#">Privacy Policy</a>
+						 &amp; <a href="#">Terms of Service</a>.</span></p>
+					</section>
+				</div>
+			
+			</form>
+		</div>
+	</div>
 </body>
 </html>
