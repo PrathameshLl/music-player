@@ -9,7 +9,6 @@ def auth(request):
     if request.user.is_authenticated:
         return render(request,"music_player/home.html")
     
-    return render(request,"music_player/home.html")
     return redirect("/signup")
 
 def signup(reqeust):
@@ -26,8 +25,9 @@ def login_user(reqeust):
 
         user = authenticate(username=username,password=password)
         if user is not None:
+            print("hii")
             login(reqeust,user)
-            messages.success("login successfully")
+            messages.success(reqeust,"login successfully")
 
 
         return redirect("/")

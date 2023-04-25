@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=, initial-scale=1.0">
+   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=yes"> 
     <title>Document</title>
     <link rel="stylesheet" href="{% static 'music_player/css/home.css' %}">
     <link rel="stylesheet" href="{% static 'tailwindcss/music_player.css' %}">
@@ -14,6 +14,7 @@
 
 <body class="min-h-screen  bg-mycolor-3 text-white ">
     <h1>this is home page</h1>
+    {{ user.username }}
     <form action="/signout" method="get">
         {% csrf_token %}
         <button type="submit">signout</button>
@@ -64,7 +65,7 @@
                 </div>
                 <div class="hidden md:flex items-center gap-1">
                     <span class="amplitude-current-time text-xs"></span>
-                    <input type="range" class="amplitude-song-slider bg-mycolor-1 w-full h-1" step=".1" />
+                    <input type="range" class="amplitude-song-slider w-full" />
                     <span class="amplitude-time-remaining text-xs" amplitude-main-time-remaining="true"></span>
                 </div>
             </div>
