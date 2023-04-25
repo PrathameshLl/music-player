@@ -11,9 +11,21 @@ module.exports = {
           4:"#146eb4",
           5:"#ff9900",
         },
+        "mycolor2":{
+          1: "#222831",
+          2:"#393E46",
+          3:"#222831",
+          4:"#EEEEEE",
+        }
+      },
+      fontFamily:{
+        'myfontreg':['gotham','sans-serif'],
+        'circular':['circular','sans-serif']
       }
     },
   },
-  plugins: [],
+  plugins: [
+    require('tailwind-scrollbar')
+  ],
 }
 
