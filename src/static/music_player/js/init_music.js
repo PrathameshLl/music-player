@@ -1,8 +1,9 @@
 console.log("initialize music")
 
+
 Amplitude.init({
     songs:[
-       {
+       {    
             "name":"Mystary Of Love",
             "artist":"Sufiyan Stevens",
             "url":"/mediafiles/songs/mystery_of_love.mp3",
@@ -23,12 +24,13 @@ Amplitude.init({
             "cover_art_url":"/mediafiles/album_cover/inrainbowscover.png",
             "album":"In Rainbow",
         },
-   
+        
     ],
 
     "bindings":{
         32: "play_pause",
     }
+
 });
 
 console.log("hello world")
