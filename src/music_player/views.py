@@ -6,4 +6,4 @@ def home(request):
 
 
 def vikrant(request):
-    return render(request,"music_player/v.html")
+    return render(request,"music_player/card.html")
