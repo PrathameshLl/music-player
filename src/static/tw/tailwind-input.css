@@ -1,3 +1,17 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+@font-face {
+
+    font-family: "gotham";
+    src: url('./fonts/gothamMedium/font.ttf');
+
+}
+
+@font-face {
+
+    font-family: "circular";
+    src: url('.fonts/circular/CircularStd-Bold,otf');
+}

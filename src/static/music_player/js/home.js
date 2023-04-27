@@ -49,5 +49,17 @@ window.addEventListener("load",(event)=>{
             prevScroll = song_title.scrollLeft;
         }
     },40);
-})
+});
+
+const mutebtn = document.getElementById("mute-btn")
+const unmutebtn = document.getElementById("unmute-btn")
+
+
+mutebtn.addEventListener("click",(event)=>{
+    togglePlayPause(mutebtn,unmutebtn);
+});
+unmutebtn.addEventListener("click",(event)=>{
+    togglePlayPause(mutebtn,unmutebtn);
+});
+
 

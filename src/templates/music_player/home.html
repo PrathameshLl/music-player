@@ -5,34 +5,50 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=yes"> 
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=yes">
     <title>Document</title>
     <link rel="stylesheet" href="{% static 'music_player/css/home.css' %}">
     <link rel="stylesheet" href="{% static 'tailwindcss/music_player.css' %}">
     <script src="{% static 'amplitudejs/amplitude.js' %}"></script>
+    <script src="{% static 'howlerjs/howler.js' %}"></script>
 </head>
 
-<body class="min-h-screen  bg-mycolor-3 text-white ">
-    <h1>this is home page</h1>
-    {{ user.username }}
-    <form action="/signout" method="get">
-        {% csrf_token %}
-        <button type="submit">signout</button>
-    </form>
-    <div id="music-controller" class="fixed bottom-0  bg-mycolor-2 w-full">
-        <input type="range" class="amplitude-song-slider md:hidden bg-mycolor-1 w-full h-1 absolute" step=".1" />
-        <div class="grid overflow-x-scroll grid-cols-2 md:grid-cols-3  mx-6 my-4">
+<body class="min-h-screen  overflow-x-hidden bg-mycolor-3 text-mycolor2-4 font-myfontreg ">
 
-            <div class="song-info flex font-mono gap-4 shrink-0 ">
+    <main class="grid grid-cols-[auto,1fr] gap-4 h-screen ">
+        <aside class="bg-mycolor-3 p-6 overflow-scroll flex-col">
+            <h1>this is home page</h1>
+            {{ user.username }}
+            <form action="/signout" method="get">
+                {% csrf_token %}
+                <button type="submit">signout</button>
+            </form>
+
+
+        </aside>
+        <section class="bg-gradient-to-tl from-mycolor-3 to-mycolor-2">
+            hello
+        </section>
+    </main>
+
+    <div id="music-controller"
+        class="fixed bottom-0 overflow-x-hidden  w-full shadow-[-1px_-20px_24px_8px_#00000024] bg-mycolor2-3">
+        <input type="range" class="amplitude-song-slider md:hidden bg-mycolor-1 w-full h-1 absolute" step=".1" />
+        <div class="grid grid-cols-2 md:grid-cols-3  mx-6 my-4">
+
+            <div class="song-info flex  gap-4 shrink-0 ">
                 <img id="album_cover" data-amplitude-song-info="cover_art_url" data-amplitude-main-song-info="true"
                     class="rounded-sm shadow-sm shadow-black object-contain w-12 md:w-16">
                 <div id="info" class="overflow-hidden">
-                    <div id="song-title" data-amplitude-song-info="name" class="song-name scrollbar-none  font-bold text-sm md:text-lg w-full overflow-scroll whitespace-nowrap"></div>
-                    <div data-amplitude-song-info="artist" class="artist_name scrollbar-none text-xs md:text-lg overflow-scroll whitespace-nowrap"></div>
+                    <div id="song-title" data-amplitude-song-info="name"
+                        class="song-name scrollbar-none  font-bold text-sm md:text-lg w-full overflow-scroll whitespace-nowrap">
+                    </div>
+                    <div data-amplitude-song-info="artist"
+                        class="artist_name scrollbar-none text-xs md:text-lg overflow-scroll whitespace-nowrap"></div>
                 </div>
             </div>
             <div class="self-center basis-full flex flex-col gap-3">
-                <div class="controls flex justify-center items-center gap-3 ">
+                <div class="controls flex justify-center items-center gap-10 ">
                     <div id="prev-btn" class="amplitude-prev">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor" class="w-8 h-8">
@@ -65,12 +81,25 @@
                 </div>
                 <div class="hidden md:flex items-center gap-1">
                     <span class="amplitude-current-time text-xs"></span>
-                    <input type="range" class="amplitude-song-slider w-full" />
+                    <input type="range" class="amplitude-song-slider w-full" Content-Range: bytes 200-1000/67589 />
                     <span class="amplitude-time-remaining text-xs" amplitude-main-time-remaining="true"></span>
                 </div>
             </div>
 
-            <div class="hidden md:flex items-center justify-end  extra-control shrink-0 p-3 ">
+            <div class="hidden md:flex gap-2 items-center justify-end  extra-control shrink-0 p-3 ">
+                <svg id="mute-btn" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" class="w-6 h-6 amplitude-mute">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M19.114 5.636a9 9 0 010 12.728M16.463 8.288a5.25 5.25 0 010 7.424M6.75 8.25l4.72-4.72a.75.75 0 011.28.53v15.88a.75.75 0 01-1.28.53l-4.72-4.72H4.51c-.88 0-1.704-.507-1.938-1.354A9.01 9.01 0 012.25 12c0-.83.112-1.633.322-2.396C2.806 8.756 3.63 8.25 4.51 8.25H6.75z" />
+                </svg>
+
+                <svg id="unmute-btn" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" class="w-6 h-6 amplitude-mute hidden">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M17.25 9.75L19.5 12m0 0l2.25 2.25M19.5 12l2.25-2.25M19.5 12l-2.25 2.25m-10.5-6l4.72-4.72a.75.75 0 011.28.531V19.94a.75.75 0 01-1.28.53l-4.72-4.72H4.51c-.88 0-1.704-.506-1.938-1.354A9.01 9.01 0 012.25 12c0-.83.112-1.633.322-2.395C2.806 8.757 3.63 8.25 4.51 8.25H6.75z" />
+                </svg>
+
+
                 <input type="range" class="amplitude-volume-slider h-1" />
             </div>
         </div>
@@ -78,5 +107,11 @@
     <script src="{% static 'music_player/js/init_music.js' %}"></script>
     <script src="{% static 'music_player/js/home.js' %}"></script>
 </body>
+<script>
+    let sound = new Howl({
+        src: ["/mediafiles/songs/jigsaw_falling.mp3"]
+    });
+    console.log(sound)
+</script>
 
 </html>
