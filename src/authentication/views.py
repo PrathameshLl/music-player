@@ -2,11 +2,16 @@ from django.shortcuts import render,redirect
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import login , authenticate,logout 
+from genius import Genius
+import inspect
 
 # Create your views here.
+GENIUS_ACCESS_TOKEN = "idlmURq2pS53tfC3HHpR13SBS6ioaZDaeZOHxyrQ2jNwlCOff4x-jItyLzTnJlw5"
+DISCOGS_ACCESS_TOKEN = "XFwlEJZtKUpuwTsCuRtYhSCeQIjPogIqfCFrDzUo"
 
 def auth(request):
     if request.user.is_authenticated:
+        g = Genius(access_token="idlmURq2pS53tfC3HHpR13SBS6ioaZDaeZOHxyrQ2jNwlCOff4x-jItyLzTnJlw5")
         return render(request,"music_player/home.html")
     
     return redirect("/signup")
@@ -60,7 +65,6 @@ def signupUser(reqeust):
         login(reqeust,user)
             
         messages.success(reqeust,"signup succesfully")
-        print("hiiiiiiiii")
         return redirect("/")
 
     return redirect("/")
