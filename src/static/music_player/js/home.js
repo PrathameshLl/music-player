@@ -66,6 +66,9 @@ unmutebtn.addEventListener("click", (event) => {
 
 
 /***********************************js relatied to add song **************************************** */
+searchSongs("city of stars").then((songs)=>{
+    console.log(songs)
+});
 let isrotated = 45;
 const song_add_interface_btn = document.getElementById("toggle-add-song-btn");
 song_add_interface_btn.addEventListener("click",(event)=>{
