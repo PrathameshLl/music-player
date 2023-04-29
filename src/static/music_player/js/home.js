@@ -66,13 +66,13 @@ unmutebtn.addEventListener("click", (event) => {
 
 
 /***********************************js relatied to add song **************************************** */
-searchSongs("city of stars").then((songs)=>{
+searchSongs("city of stars").then((songs) => {
     console.log(songs)
 });
 let isrotated = 45;
 const song_add_interface_btn = document.getElementById("toggle-add-song-btn");
-song_add_interface_btn.addEventListener("click",(event)=>{
-    const add_song_notice = document.getElementById("song-adding-notice");    
+song_add_interface_btn.addEventListener("click", (event) => {
+    const add_song_notice = document.getElementById("song-adding-notice");
     add_song_notice.classList.toggle("opacity-0")
     document.getElementById("song-adding-interface").classList.toggle("opacity-0")
 
@@ -80,4 +80,39 @@ song_add_interface_btn.addEventListener("click",(event)=>{
     song_add_interface_btn.style.transform = `rotate(${isrotated}deg)`;
     isrotated += 45;
 });
-/**************************************************************************************** */
+
+
+song_add_search = document.getElementById("song-add-search");
+if (song_add_search) {
+    /*
+        <div 
+            class="song_item flex gap-3 hover:bg-mycolor-4 p-2 text-xs rounded-md border-b border-mycolor2-2">
+            <img src="/mediafiles/album_cover/Blindinglights.jpg"
+            class="shrink-0 w-10 object-contain">
+            <div class="">
+                <span>Blinding Lights</span> <br>
+                <span>The Weeknd </span>
+            </div>
+        </div>
+
+    */
+    song_add_search.addEventListener("input", (event) => {
+        searchSongs(event.target.value).then((songs) => {
+            searchSongs(event.target.value)
+                .then((songs) => {
+                    songs.forEach((song,i) => {
+                        console.log(i)
+                        search_item = document.createElement("div");
+                        $(search_item).addClass('flex gap-3 hover:bg-mycolor-4 p-2 text-xs rounded-md border-b border-mycolor2-2')
+                        $(search_item).attr("id",i);
+
+
+                        
+                    });
+                });
+
+
+        })
+    });
+}
+/******j********************************************************************************** */

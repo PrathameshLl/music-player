@@ -103,7 +103,7 @@
                             <div id="song-adding-interface" class="flex absolute z-10 flex-col md:flex-row h-full w-full duration-500 opacity-0">
                                 <div class="shrink-0 grow-0 h-full">
                                     <div class="flex items-center gap-2">
-                                        <label class="">Search Song</label> <input
+                                        <label class="">Search Song</label> <input id="song-add-search"
                                             class="rounded-full p-1 px-3 bg-mycolor2-2" type="text" name="song_search">
                                         <br>
                                     </div>
@@ -115,6 +115,7 @@
 
                                 <div id="song-results"
                                     class="border-l border-mycolor2-3 w-full h-full px-4 overflow-scroll scrollbar-none">
+
                                     <div id="song-found"
                                         class="flex gap-3 hover:bg-mycolor-4 p-2 text-xs rounded-md border-b border-mycolor2-2">
                                         <img src="/mediafiles/album_cover/Blindinglights.jpg"
@@ -124,6 +125,8 @@
                                             <span>The Weeknd </span>
                                         </div>
                                     </div>
+
+
                                 </div>
                             </div>
 
@@ -142,6 +145,7 @@
 
     {% include 'music_player/music_controller.html' %}
 
+    <script src="{% static 'jquery.js' %}"></script>
     <script src="{% static 'music_player/js/init_music.js' %}"></script>
     <script src="{% static 'music_player/js/music_operations.js' %}"></script>
     <script src="{% static 'music_player/js/home.js' %}"></script>
