@@ -98,6 +98,7 @@ if (song_add_search) {
     */
     song_add_search.addEventListener("input", (event) => {
         searchSongs(event.target.value).then((songs) => {
+            $("#song-results").empty();
             searchSongs(event.target.value)
                 .then((songs) => {
                     songs.forEach((song,i) => {
@@ -105,6 +106,17 @@ if (song_add_search) {
                         search_item = document.createElement("div");
                         $(search_item).addClass('flex gap-3 hover:bg-mycolor-4 p-2 text-xs rounded-md border-b border-mycolor2-2')
                         $(search_item).attr("id",i);                        
+
+                        
+                        $(search_item).append(`<img src=${song.header_image_url} class="shrink-0 w-10 object-contain">`)
+                        $(search_item).append(
+                            `<div class="">
+                                <span>${song.title}</span> <br>
+                                <span>${song.artist_names}</span>
+                                </div>`
+                        );
+                        $("#song-results").append(search_item);
+                        console.log(search_item)
                     });
                 });
 
