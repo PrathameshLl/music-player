@@ -57,7 +57,7 @@ img{
     width: 3.5rem;
     height: 3.5rem;
     border-radius: 50%;
-    background-color: rgb(50,233,50);
+    background-color: #ff9900;
     display: grid;
     place-items: center;
     transform: scale(0.95);
