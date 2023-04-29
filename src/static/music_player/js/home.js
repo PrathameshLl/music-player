@@ -104,10 +104,7 @@ if (song_add_search) {
                         console.log(i)
                         search_item = document.createElement("div");
                         $(search_item).addClass('flex gap-3 hover:bg-mycolor-4 p-2 text-xs rounded-md border-b border-mycolor2-2')
-                        $(search_item).attr("id",i);
-
-
-                        
+                        $(search_item).attr("id",i);                        
                     });
                 });
 
