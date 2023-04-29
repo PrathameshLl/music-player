@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="{% static 'tailwindcss/music_player.css' %}">
     <script src="{% static 'amplitudejs/amplitude.js' %}"></script>
     <script src="{% static 'howlerjs/howler.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'music_player/css/playlist_card.css' %}">
 </head>
 
 <body class="min-h-screen  overflow-x-hidden bg-mycolor-3 text-mycolor2-4 font-myfontreg ">
@@ -64,7 +65,7 @@
 
 
 
-            <div id="intro-component" class="p-10 live-content  h-full">
+            <div id="intro-component" class="p-10 live-content">
 
                 <div class="intro-user-greeting my-6">
                     <h1 class="text-5xl">Welcome {{user.username}}</h1>
@@ -135,8 +136,8 @@
                 </div>
             </div>
 
-            <div id="playlist-compo" class="hidden">
-
+            <div id="playlist-compo" class="">
+                {% include 'music_player/card.html' %}
             </div>
 
 
