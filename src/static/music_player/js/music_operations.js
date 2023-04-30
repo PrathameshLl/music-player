@@ -8,4 +8,12 @@ async function searchSongs(search_term) {
         return song_obj.result;
     }); 
     return songs;
+};
+
+
+async function getSongDetails(song_id){
+    url = `http://api.genius.com/songs/${song_id}?access_token=${client_access_token}`
+     const response = await fetch(url).then(res => res.json())
+    const song = response.response.song;
+    return song;
 }

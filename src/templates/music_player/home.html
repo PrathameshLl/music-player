@@ -12,6 +12,9 @@
     <script src="{% static 'modules/amplitudejs/amplitude.js' %}"></script>
     <script src="{% static 'modules/howlerjs/howler.js' %}"></script>
     <script src="{% static 'modules/jquery/jquery.js' %}"></script>
+    <script>
+        const defaultAddImg = "{% static 'music_player/images/addMusic.png' %}";
+    </script>
     <link rel="stylesheet" href="{% static 'music_player/css/playlist_card.css' %}">
 </head>
 
@@ -78,7 +81,7 @@
                         <div id="add-song-controller" class="flex flex-row gap-4">
 
                             <div class="w-40 h-40 shrink-0 flex  justify-center items-center relative ">
-                                <img src="{% static 'music_player/images/addMusic.png' %}" class="object-contain">
+                                <img id="song-adding-img" src="{% static 'music_player/images/addMusic.png' %}" class="object-contain">
                                 <svg id="toggle-add-song-btn" xmlns="http://www.w3.org/2000/svg" fill="none"
                                     viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" translate="rotate(0)"
                                     class="w-14 h-14 transition-transform  duration-300 stroke-mycolor-3 hover:stroke-mycolor-4 pointer-events-auto  absolute">
@@ -125,21 +128,22 @@
                                     </div>
                                 </div>
 
-                                <div id="song-confirmation" class="absolute hidden flex gap-1 flex-col">
+                                <div id="song-confirmation" class="absolute opacity-0 duration-500 flex gap-1 flex-col">
+
                                     <div>
-                                        Song Name: <span class="text-mycolor-4"> only shalow </span>
+                                        Song Name: <span id="song-selection-title" class="text-mycolor-4"></span>
                                     </div>
-                                    <div>
-                                        Artist: <span class="text-mycolor-4"> My Bloody Valentine </span>
+                                    <div >
+                                        Artist: <span id="song-selection-artist" class="text-mycolor-4"></span>
                                     </div>
-                                    <div>
-                                        Album: <span class="text-mycolor-4"> Ok computer</span>
+                                    <div >
+                                        Album: <span id="song-selection-album" class="text-mycolor-4"></span>
                                     </div>
                                     <div>
                                         File Type: mp3
                                     </div>
 
-                                    <button class="bg-mycolor-4 py-1 rounded-md hover:opacity-90">upload</button>
+                                    <button class="bg-mycolor-4 py-1 my-2 rounded-md hover:opacity-90">Upload</button>
                                 </div>
 
                             </div>
@@ -158,7 +162,7 @@
 
     </main>
     {% include 'music_player/music_controller.html' %}
-    <script src="{% static 'music_player/js/utilities.js' %}"
+    <script src="{% static 'music_player/js/utilities.js' %}"></script>
     <script src="{% static 'music_player/js/init_music.js' %}"></script>
     <script src="{% static 'music_player/js/music_operations.js' %}"></script>
     <script src="{% static 'music_player/js/home.js' %}"></script>

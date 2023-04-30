@@ -69,14 +69,55 @@ unmutebtn.addEventListener("click", (event) => {
 let isrotated = 45;
 const song_add_interface_btn = document.getElementById("toggle-add-song-btn");
 song_add_interface_btn.addEventListener("click", (event) => {
-    const add_song_notice = document.getElementById("song-adding-notice");
-    add_song_notice.classList.toggle("opacity-100");
-    document.getElementById("song-adding-interface").classList.toggle("opacity-0")
-
     song_add_interface_btn.style.transform = `rotate(${isrotated}deg)`;
     isrotated += 45;
+    if (!$("#song-confirmation").hasClass("opacity-0")) {
+        $("#song-adding-img").attr("src", defaultAddImg);
+        $("#song-adding-interface").toggleClass("opacity-0");
+        $("#song-confirmation").toggleClass("opacity-0");
+        return;
+    };
+
+    $("#song-adding-notice").toggleClass("opacity-100");
+    $("#song-adding-interface").toggleClass("opacity-0");
+
 });
 
+
+
+
+
+async function handleSongAdd(event) {
+    console.log("handlesongadd");
+
+    var file_name = $("#song-file").val()
+    if (file_name == "") {
+        myalert("Music File is Missing ");
+        return;
+    }
+    if (file_name.split(".").pop() !== "mp3") {
+        myalert("please put a music file");
+        return;
+    }
+    file = document.getElementById("song-file").files[0];
+    let response_song = await getSongDetails(event.currentTarget.dataset.id);
+
+    song_details = {
+        title: response_song.title,
+        artist: response_song.artist_names,
+        album_name: response_song.album.name,
+        album_cover: response_song.album.cover_art_url,
+        file: file
+    }
+    console.log(song_details)
+    $("#song-adding-interface").toggleClass("opacity-0");
+    $("#song-confirmation").toggleClass("opacity-0");
+    $("#song-selection-title").empty().append(`<span class="text-mycolor-4" >${song_details.title}</span>`);
+    $("#song-selection-artist").empty().append(`<span class="text-mycolor-4">${song_details.artist}</span>`);
+    $("#song-selection-album").empty().append(`<span class="text-mycolor-4">${song_details.album_name}</span>`);
+    $("#song-adding-img").attr("src", song_details.album_cover);
+
+};
 
 song_add_search = document.getElementById("song-add-search");
 if (song_add_search) {
@@ -102,10 +143,11 @@ if (song_add_search) {
                         search_item = document.createElement("div");
                         $(search_item).addClass('flex song_add_item gap-3 hover:bg-mycolor-4 p-2 text-xs rounded-md border-b border-mycolor2-2')
                         $(search_item).attr("id", i);
-                        $(search_item).attr("onclick", "handleSongAdd(event)");
+                        $(search_item).click(handleSongAdd);
                         $(search_item).attr("data-title", `${song.title}`);
-                        $(search_item).attr("data-artist", `${song.artist}`);
+                        $(search_item).attr("data-artist", `${song.artist_names}`);
                         $(search_item).attr("data-album", `${song.album}`);
+                        $(search_item).attr("data-id", `${song.id}`);
                         $(search_item).attr("data-album_cover", `${song.song_art_image_url}`);
 
 
@@ -125,17 +167,8 @@ if (song_add_search) {
     });
 };
 
-function handleSongAdd(evnet){
-    console.log("handlesongadd");
-    file =  $("#song-file").val()
-    if(file == ""){
-        myalert("Music File is Missing ");
-        return;
-    }
-    if(file.split(".").pop() !== "mp3"){
-        myalert("please put a music file");
-        return;
-    }
-}
+
+
+
 
 /******j********************************************************************************** */
