@@ -1,54 +1,59 @@
 <!DOCTYPE html>
 {% load static %}
 <html lang="en">
-    <head>
+
+<head>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="{% static 'authentication/css/signin.css' %}">
+	<link rel="stylesheet" href="{% static 'authentication/css/signup_in.css' %}">
+	<link rel="stylesheet" href="{% static 'tailwindcss/music_player.css' %}">
 	<title>Music player</title>
 </head>
+
 <body>
-	<div class="split-screen">
+	<div class="split-screen bg-gradient-to-tl scrollbar-none from-mycolor-3 to-mycolor-2">
 		<div class="left">
 			<section class="copy">
 				<h1>Missed Us?</h1>
-        <h2>Tune IN</h2>  
+				<h2>Tune IN</h2>
 				<p>Just blend in 1000+ songs</p>
 			</section>
 		</div>
 		<div class="right">
 			<form method="post" action="/signinuser">
 				{% csrf_token %}
-				
-				<section class="copy">
+
+				<section class="copy my-12 text-3xl">
 					<h2>Sign In</h2>
 				</section>
 				<div class="input-container name">
 					<label for="username">Enter Username / Email </label>
-					<input id="fname" class="input-height" name="username" type="text">
+					<input id="fname" class="input-height bg-mycolor2-1" name="username" type="text">
 				</div>
-				
+
 				<div class="input-container password">
 					<label for="password">Password</label>
-					<input id="password" class="input-height" name="password" placeholder="Must be atleast 6 character"
-					 type="password">
-					 <i class="far fa-eye-slash"></i>
+					<input id="password" class="input-height bg-mycolor2-1" name="password" placeholder="Must be atleast 6 character"
+						type="password">
+					<i class="far fa-eye-slash"></i>
 				</div>
-				<div class="login-container">
-          <p>Forgot your Password? <a href="/signin">
-            <strong>Click here</strong></a></p>
-        </div>
+				<div class="login-container text-white">
+					<p class="my-4">Forgot your Password? <a href="/signin">
+							<strong>Click here</strong></a></p>
+				</div>
 				<div>
-					<button class="signin-btn" type="submit">Sign In</button>
+					<button class="signup-btn bg-mycolor-4" type="submit">Sign In</button>
 					<section class="copy legal">
-						<p><span class="small">By continuing, you agree to accept our <br> <a href="#">Privacy Policy</a>
-						 &amp; <a href="#">Terms of Service</a>.</span></p>
+						<p><span class="small">By continuing, you agree to accept our <br> <a href="#">Privacy
+									Policy</a>
+								&amp; <a href="#">Terms of Service</a>.</span></p>
 					</section>
 				</div>
-			
+
 			</form>
 		</div>
 	</div>
 </body>
+
 </html>

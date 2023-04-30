@@ -6,24 +6,30 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="{% static 'authentication/css/signup_in.css' %}">
+	<link rel="stylesheet" href="{% static 'tailwindcss/music_player.css' %}">
+	<script  src="{% static 'modules/jquery/jquery.js' %}"> </script>
 	<title>Document</title>
 
-	
+	<script>
+		var image_url = "{% static 'authentication/images/weeknd.jpg' %}";
+	</script>	
+
 </head>
-<body>
-	<div class="split-screen">
-		<div class="left">
-			<section class="copy">
+<body class="bg-gradient-to-tl scrollbar-none from-mycolor-3 to-mycolor-2">
+	<div class="split-screen overflow-hidden">
+		<div id="left-section" class="relative left h-full object-cover">
+			<img src="{% static 'authentication/images/weeknd.jpg' %}" class="absolute -z-10 gradient-mask-r-10" alt="">	
+			<section id="tagline" class="copy">
 				<h1>Dive into real MUSIC</h1>
 				<p>Just blend in 1000+ songs</p>
 			</section>
 		</div>
-		<div class="right">
+		<div class="right h-full">
 			<form method="post" action="/signupuser">
 
 				{% csrf_token %}
 				<section class="copy">
-					<h2>Sign Up</h2>
+					<h2 class="text-2xl">Sign Up</h2>
 					<div class="login-container">
 						<p>Already have an acount? <a href="/signin">
 							<strong>Log In</strong></a></p>
@@ -31,27 +37,27 @@
 				</section>
 				<div class="input-container name">
 					<label for="username">Enter username </label>
-					<input id="fname" class="input-height" name="username" type="text">
+					<input id="fname" class="input-height bg-mycolor2-1" name="username" type="text">
 				</div>
 				<div class="input-container email">
 					<label for="email">Email</label>
-					<input id="email" class="input-height" name="email" type="email">
+					<input id="email" class="input-height bg-mycolor2-1" name="email" type="email">
 				</div>
 				<div class="input-container password">
 					<label for="password">Password</label>
-					<input id="password" class="input-height" name="password" placeholder="Must be atleast 6 character"
+					<input id="password" class="input-height bg-mycolor2-1" name="password" placeholder="Must be atleast 6 character"
 					 type="password">
 					 <i class="far fa-eye-slash"></i>
 				</div>
-				<div class="input-container cta py">
+				<div class="input-container cta">
 					<label class="checkbox-container">
 						<input type="checkbox">
 						<span class="checkmark"></span>
-						Sign Up for email updates.
+						<span class="ml-2">sign up for email updates.</span>
 					</label>
 				</div>
 				<div>
-					<button class="signup-btn" type="submit">Sign Up</button>
+					<button class="signup-btn bg-mycolor-4 hover:bg-opacity-80" type="submit">Sign Up</button>
 					<section class="copy legal">
 						<p><span class="small">By continuing, you agree to accept our <br> <a href="#">Privacy Policy</a>
 						 &amp; <a href="#">Terms of Service</a>.</span></p>
@@ -61,5 +67,6 @@
 			</form>
 		</div>
 	</div>
+	<script src="{% static 'authentication/js/signin_out.js' %}"></script>
 </body>
 </html>

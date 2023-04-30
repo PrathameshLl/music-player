@@ -25,7 +25,8 @@ module.exports = {
     },
   },
   plugins: [
-    require('tailwind-scrollbar')
+    require('tailwind-scrollbar'),
+    require("tailwind-gradient-mask-image"),
   ],
 }
 
