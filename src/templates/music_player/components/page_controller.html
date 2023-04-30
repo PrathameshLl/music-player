@@ -1,0 +1,28 @@
+ <div id="page-controller" class="flex justify-between">
+     <div id="" class="flex gap-3 mx-4">
+         <div>
+             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                 stroke="currentColor" class="w-6 h-6 hover:stroke-mycolor-5">
+                 <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+             </svg>
+         </div>
+         <div>
+             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                 stroke="currentColor" class="w-6 h-6 hover:stroke-mycolor-5">
+                 <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+             </svg>
+
+         </div>
+     </div>
+
+     <div class="search-song flex gap-2 ">
+         <input type="text" placeholder="Search Music" class="text-mycolor-2 px-4 rounded-full focus:outline-none">
+     </div>
+
+     <form action="/signout" method="get" class="mx-4">
+         {% csrf_token %}
+         <button type="submit" class="hover:text-mycolor-5">Sign Out</button>
+     </form>
+
+
+ </div>

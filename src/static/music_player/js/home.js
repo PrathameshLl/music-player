@@ -116,7 +116,7 @@ async function handleSongAdd(event) {
         return;
     }
     if (file_name.split(".").pop() !== "mp3") {
-        myalert("please put a music file");
+        myalert("please put a music file","wrong");
         return;
     }
     file = document.getElementById("song-file").files[0];
