@@ -9,8 +9,9 @@
     <title>Document</title>
     <link rel="stylesheet" href="{% static 'music_player/css/home.css' %}">
     <link rel="stylesheet" href="{% static 'tailwindcss/music_player.css' %}">
-    <script src="{% static 'amplitudejs/amplitude.js' %}"></script>
-    <script src="{% static 'howlerjs/howler.js' %}"></script>
+    <script src="{% static 'modules/amplitudejs/amplitude.js' %}"></script>
+    <script src="{% static 'modules/howlerjs/howler.js' %}"></script>
+    <script src="{% static 'modules/jquery/jquery.js' %}"></script>
     <link rel="stylesheet" href="{% static 'music_player/css/playlist_card.css' %}">
 </head>
 
@@ -30,7 +31,7 @@
 
 
         <section
-            class="bg-gradient-to-tl p-4 flex flex-col gap-4 scrollbar-none from-mycolor-3 to-mycolor-2 border overflow-y-scroll overflow-x-hidden">
+            class="relative bg-gradient-to-tl p-4 flex flex-col gap-4 scrollbar-none from-mycolor-3 to-mycolor-2 border overflow-y-scroll overflow-x-hidden">
             <div id="page-controller" class="flex justify-between">
                 <div id="" class="flex gap-3 mx-4">
                     <div>
@@ -64,77 +65,100 @@
             </div>
 
 
+            <div id="home-page">
+                <div id="intro-component" class="p-10 live-content">
 
-            <div id="intro-component" class="p-10 live-content">
+                    <div class="intro-user-greeting my-6">
+                        <h1 class="text-5xl">Welcome {{user.username}}</h1>
+                    </div>
 
-                <div class="intro-user-greeting my-6">
-                    <h1 class="text-5xl">Welcome {{user.username}}</h1>
-                </div>
+                    <div id="song-add">
+                        <h2 class="my-4"> Add Song </h2>
 
-                <div id="song-add">
-                    <h2 class="my-4"> Add Song </h2>
-                    <div id="add-song-controller" class="flex flex-col md:flex-row gap-4">
+                        <div id="add-song-controller" class="flex flex-row gap-4">
 
-                        <div class="w-40 h-40 shrink-0 flex  justify-center items-center relative ">
-                            <img src="{% static 'music_player/images/addMusic.png' %}" class="object-contain">
-                            <svg id="toggle-add-song-btn" xmlns="http://www.w3.org/2000/svg" fill="none"
-                                viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" translate="rotate(0)"
-                                class="w-14 h-14 transition-transform  duration-300 stroke-mycolor-3 hover:stroke-mycolor-4 pointer-events-auto  absolute">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="m12 4.5v15m7.5-7.5h-15" />
-                            </svg>
-                        </div>
-
-                        <div class="basis-full relative">
-
-                            <div id="song-adding-notice" class="duration-500 w-full absolute z-0 overflow-hidden opacity-100">
-                                <p class="my-2">
-                                    Your Favroite Song Not Available :( <br>
-                                    No Problem add Once Listen Anytime <br>
-
-                                </p>
-                                <p class="opacity-100">
-                                    <span class="text-mycolor-5">Note</span>: Any Song you add On this Site is Added
-                                    without Right Holder Permission.
-                                    This is Non-Commercial Project and just For Education Purpose Thank you
-                                </p>
-
-
+                            <div class="w-40 h-40 shrink-0 flex  justify-center items-center relative ">
+                                <img src="{% static 'music_player/images/addMusic.png' %}" class="object-contain">
+                                <svg id="toggle-add-song-btn" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                    viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" translate="rotate(0)"
+                                    class="w-14 h-14 transition-transform  duration-300 stroke-mycolor-3 hover:stroke-mycolor-4 pointer-events-auto  absolute">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="m12 4.5v15m7.5-7.5h-15" />
+                                </svg>
                             </div>
 
-                            <div id="song-adding-interface" class="flex absolute z-10 flex-col md:flex-row h-full w-full duration-500 opacity-0">
-                                <div class="shrink-0 grow-0 h-full">
-                                    <div class="flex items-center gap-2">
-                                        <label class="">Search Song</label> <input id="song-add-search"
-                                            class="rounded-full p-1 px-3 bg-mycolor2-2" type="text" name="song_search">
-                                        <br>
-                                    </div>
-                                    <div class="my-4">
-                                        <label class="">Add Song File</label> <input type="file" name="song_file" id="">
-                                    </div>
-                                    <div>Search Eg: "song name" by "artist_name" </div>
+                            <div class="basis-full relative">
+
+                                <div id="song-adding-notice"
+                                    class="duration-500 w-full absolute z-0 overflow-hidden opacity-0 opacity-100">
+                                    <p class="my-2">
+                                        Your Favroite Song Not Available :( <br>
+                                        No Problem add Once Listen Anytime <br>
+
+                                    </p>
+                                    <p class="opacity-100">
+                                        <span class="text-mycolor-5">Note</span>: Any Song you add On this Site is Added
+                                        without Right Holder Permission.<br>
+                                        This is Non-Commercial Project and just For Education Purpose Thank you
+                                    </p>
+
+
                                 </div>
 
-                                <div id="song-results"
-                                    class="border-l border-mycolor2-3 w-full h-full px-4 overflow-scroll scrollbar-none">
+                                <div id="song-adding-interface"
+                                    class="flex  absolute z-10 flex-row h-full w-full duration-500 opacity-0">
+                                    <div class="shrink-0 grow-0 h-full">
+                                        <div class="flex items-center gap-2">
+                                            <label class="">Search Song</label> <input id="song-add-search"
+                                                class="rounded-full p-1 px-3 bg-mycolor2-2" type="text"
+                                                name="song_search">
+                                            <br>
+                                        </div>
+                                        <div class="my-4">
+                                            <label  class="">Add Song File</label> <input id="song-file"type="file" name="song_file"
+                                                id="">
+                                        </div>
+                                        <div>Search Eg: "song name" by "artist_name" </div>
+                                    </div>
+
+                                    <div id="song-results"
+                                        class="border-l border-mycolor2-3 w-full h-full px-4 overflow-scroll scrollbar-none">
+                                    </div>
                                 </div>
+
+                                <div id="song-confirmation" class="absolute hidden flex gap-1 flex-col">
+                                    <div>
+                                        Song Name: <span class="text-mycolor-4"> only shalow </span>
+                                    </div>
+                                    <div>
+                                        Artist: <span class="text-mycolor-4"> My Bloody Valentine </span>
+                                    </div>
+                                    <div>
+                                        Album: <span class="text-mycolor-4"> Ok computer</span>
+                                    </div>
+                                    <div>
+                                        File Type: mp3
+                                    </div>
+
+                                    <button class="bg-mycolor-4 py-1 rounded-md hover:opacity-90">upload</button>
+                                </div>
+
                             </div>
-
                         </div>
                     </div>
                 </div>
+
+                <div id="playlist-compo" class="">
+                </div>
+
             </div>
 
-            <div id="playlist-compo" class="">
-                {% include 'music_player/card.html' %}
-            </div>
 
-
+          {% include 'music_player/components/alert.html' %} 
         </section>
+
     </main>
-
     {% include 'music_player/music_controller.html' %}
-
-    <script src="{% static 'jquery.js' %}"></script>
+    <script src="{% static 'music_player/js/utilities.js' %}"
     <script src="{% static 'music_player/js/init_music.js' %}"></script>
     <script src="{% static 'music_player/js/music_operations.js' %}"></script>
     <script src="{% static 'music_player/js/home.js' %}"></script>
