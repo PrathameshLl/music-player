@@ -66,16 +66,12 @@ unmutebtn.addEventListener("click", (event) => {
 
 
 /***********************************js relatied to add song **************************************** */
-searchSongs("city of stars").then((songs) => {
-    console.log(songs)
-});
 let isrotated = 45;
 const song_add_interface_btn = document.getElementById("toggle-add-song-btn");
 song_add_interface_btn.addEventListener("click", (event) => {
     const add_song_notice = document.getElementById("song-adding-notice");
-    add_song_notice.classList.toggle("opacity-0")
+    add_song_notice.classList.toggle("opacity-100");
     document.getElementById("song-adding-interface").classList.toggle("opacity-0")
-
 
     song_add_interface_btn.style.transform = `rotate(${isrotated}deg)`;
     isrotated += 45;
@@ -101,14 +97,19 @@ if (song_add_search) {
             $("#song-results").empty();
             searchSongs(event.target.value)
                 .then((songs) => {
-                    songs.forEach((song,i) => {
-                        console.log(i)
+                    console.log(songs)
+                    songs.forEach((song, i) => {
                         search_item = document.createElement("div");
-                        $(search_item).addClass('flex gap-3 hover:bg-mycolor-4 p-2 text-xs rounded-md border-b border-mycolor2-2')
-                        $(search_item).attr("id",i);                        
+                        $(search_item).addClass('flex song_add_item gap-3 hover:bg-mycolor-4 p-2 text-xs rounded-md border-b border-mycolor2-2')
+                        $(search_item).attr("id", i);
+                        $(search_item).attr("onclick", "handleSongAdd(event)");
+                        $(search_item).attr("data-title", `${song.title}`);
+                        $(search_item).attr("data-artist", `${song.artist}`);
+                        $(search_item).attr("data-album", `${song.album}`);
+                        $(search_item).attr("data-album_cover", `${song.song_art_image_url}`);
 
-                        
-                        $(search_item).append(`<img src=${song.header_image_url} class="shrink-0 w-10 object-contain">`)
+
+                        $(search_item).append(`<img src=${song.song_art_image_url} class="shrink-0 w-10 object-contain">`)
                         $(search_item).append(
                             `<div class="">
                                 <span>${song.title}</span> <br>
@@ -116,12 +117,25 @@ if (song_add_search) {
                                 </div>`
                         );
                         $("#song-results").append(search_item);
-                        console.log(search_item)
                     });
                 });
 
 
-        })
+        });
     });
+};
+
+function handleSongAdd(evnet){
+    console.log("handlesongadd");
+    file =  $("#song-file").val()
+    if(file == ""){
+        myalert("Music File is Missing ");
+        return;
+    }
+    if(file.split(".").pop() !== "mp3"){
+        myalert("please put a music file");
+        return;
+    }
 }
+
 /******j********************************************************************************** */
