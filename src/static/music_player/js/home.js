@@ -66,20 +66,40 @@ unmutebtn.addEventListener("click", (event) => {
 
 
 /***********************************js relatied to add song **************************************** */
-let isrotated = 45;
+
+function getRatationAngle(degree) {
+    let rotation = degree;
+
+    function closure(add) {
+        let rotation_at_point = rotation;
+        rotation += add;
+        return rotation_at_point;
+    };
+    return closure;
+}
+
+rotate = getRatationAngle(45);
+
 const song_add_interface_btn = document.getElementById("toggle-add-song-btn");
 song_add_interface_btn.addEventListener("click", (event) => {
-    song_add_interface_btn.style.transform = `rotate(${isrotated}deg)`;
-    isrotated += 45;
+
+    song_add_interface_btn.style.transform = `rotate(${rotate(45)}deg)`;
+
     if (!$("#song-confirmation").hasClass("opacity-0")) {
         $("#song-adding-img").attr("src", defaultAddImg);
         $("#song-adding-interface").toggleClass("opacity-0");
         $("#song-confirmation").toggleClass("opacity-0");
+        $("#song-adding-interface").toggleClass("z-40");
+        $("#song-adding-interface").toggleClass("z-10");
         return;
     };
 
     $("#song-adding-notice").toggleClass("opacity-100");
     $("#song-adding-interface").toggleClass("opacity-0");
+
+    $("#song-adding-notice").toggleClass("z-50");
+    $("#song-adding-notice").toggleClass("z-20");
+    return;
 
 });
 
@@ -92,7 +112,7 @@ async function handleSongAdd(event) {
 
     var file_name = $("#song-file").val()
     if (file_name == "") {
-        myalert("Music File is Missing ");
+        myalert("Music File is Missing ", "wrong");
         return;
     }
     if (file_name.split(".").pop() !== "mp3") {
@@ -109,14 +129,17 @@ async function handleSongAdd(event) {
         album_cover: response_song.album.cover_art_url,
         file: file
     }
-    console.log(song_details)
     $("#song-adding-interface").toggleClass("opacity-0");
     $("#song-confirmation").toggleClass("opacity-0");
+
+    $("#song-adding-interface").toggleClass("z-40");
+    $("#song-adding-interface").toggleClass("z-10");
+
+
     $("#song-selection-title").empty().append(`<span class="text-mycolor-4" >${song_details.title}</span>`);
     $("#song-selection-artist").empty().append(`<span class="text-mycolor-4">${song_details.artist}</span>`);
     $("#song-selection-album").empty().append(`<span class="text-mycolor-4">${song_details.album_name}</span>`);
     $("#song-adding-img").attr("src", song_details.album_cover);
-
 };
 
 song_add_search = document.getElementById("song-add-search");
@@ -133,39 +156,56 @@ if (song_add_search) {
         </div>
 
     */
-    song_add_search.addEventListener("input", (event) => {
-        searchSongs(event.target.value).then((songs) => {
-            $("#song-results").empty();
-            searchSongs(event.target.value)
-                .then((songs) => {
-                    console.log(songs)
-                    songs.forEach((song, i) => {
-                        search_item = document.createElement("div");
-                        $(search_item).addClass('flex song_add_item gap-3 hover:bg-mycolor-4 p-2 text-xs rounded-md border-b border-mycolor2-2')
-                        $(search_item).attr("id", i);
-                        $(search_item).click(handleSongAdd);
-                        $(search_item).attr("data-title", `${song.title}`);
-                        $(search_item).attr("data-artist", `${song.artist_names}`);
-                        $(search_item).attr("data-album", `${song.album}`);
-                        $(search_item).attr("data-id", `${song.id}`);
-                        $(search_item).attr("data-album_cover", `${song.song_art_image_url}`);
+    let global_state = 0
+    function handleAddSongSearch(event) {
+
+        function getSearchSongRequest() {
+            global_state += 1;
+            let local_state = global_state;
+            
+            function onAddSearch() {
+                setTimeout(() => {
+                    if (local_state === global_state) {
+                        searchSongs(event.target.value).then((songs) => {
+                            $("#song-results").empty();
+                            songs.forEach((song, i) => {
+                                search_item = document.createElement("div");
+                                $(search_item).addClass('flex song_add_item gap-3 hover:bg-mycolor-4 p-2 text-xs rounded-md border-b border-mycolor2-2')
+                                $(search_item).attr("id", i);
+                                $(search_item).click(handleSongAdd);
+                                $(search_item).attr("data-title", `${song.title}`);
+                                $(search_item).attr("data-artist", `${song.artist_names}`);
+                                $(search_item).attr("data-album", `${song.album}`);
+                                $(search_item).attr("data-id", `${song.id}`);
+                                $(search_item).attr("data-album_cover", `${song.song_art_image_url}`);
 
 
-                        $(search_item).append(`<img src=${song.song_art_image_url} class="shrink-0 w-10 object-contain">`)
-                        $(search_item).append(
-                            `<div class="">
+                                $(search_item).append(`<img src=${song.song_art_image_url} class="shrink-0 w-10 object-contain">`)
+                                $(search_item).append(
+                                    `<div class="">
                                 <span>${song.title}</span> <br>
                                 <span>${song.artist_names}</span>
                                 </div>`
-                        );
-                        $("#song-results").append(search_item);
-                    });
-                });
+                                );
+                                $("#song-results").append(search_item);
+                            });
 
+                        });
+                    }
+                },500);
 
-        });
-    });
+            };
+
+            return onAddSearch
+        }
+
+        requestSong = getSearchSongRequest(); 
+        requestSong();
+        return;
+    }
+    song_add_search.addEventListener("input", handleAddSongSearch);
 };
+
 
 
 
