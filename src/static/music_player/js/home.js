@@ -67,6 +67,10 @@ unmutebtn.addEventListener("click", (event) => {
 
 /***********************************js relatied to add song **************************************** */
 
+function setCardOrder(card){
+    return;
+}
+
 function getRatationAngle(degree) {
     let rotation = degree;
 
@@ -104,21 +108,29 @@ song_add_interface_btn.addEventListener("click", (event) => {
 });
 
 
-
-
-
+const formdata = new FormData();
 async function handleSongAdd(event) {
     console.log("handlesongadd");
 
     var file_name = $("#song-file").val()
     if (file_name == "") {
-        myalert("Music File is Missing ", "wrong");
+        myalert("Music File is Missing ", "failed");
         return;
     }
     if (file_name.split(".").pop() !== "mp3") {
-        myalert("please put a music file","wrong");
+        myalert("please put a music file","failed");
         return;
     }
+
+
+    $("#song-adding-interface").toggleClass("opacity-0");
+    $("#song-confirmation").toggleClass("opacity-0");
+
+    $("#song-adding-interface").toggleClass("z-40");
+    $("#song-adding-interface").toggleClass("z-10");
+
+
+
     file = document.getElementById("song-file").files[0];
     let response_song = await getSongDetails(event.currentTarget.dataset.id);
 
@@ -127,20 +139,26 @@ async function handleSongAdd(event) {
         artist: response_song.artist_names,
         album_name: response_song.album.name,
         album_cover: response_song.album.cover_art_url,
+        release_date: response_song.album.release_date_for_display,
         file: file
-    }
-    $("#song-adding-interface").toggleClass("opacity-0");
-    $("#song-confirmation").toggleClass("opacity-0");
+    };
 
-    $("#song-adding-interface").toggleClass("z-40");
-    $("#song-adding-interface").toggleClass("z-10");
+    formdata.append("file",file);
+    formdata.append("title",song_details.title);
+    formdata.append("artist_name",song_details.artist);
+    formdata.append("album_name",song_details.album_name);
+    formdata.append("album_cover",song_details.album_cover);
+    formdata.append("release_date",song_details.release_date);
 
 
     $("#song-selection-title").empty().append(`<span class="text-mycolor-4" >${song_details.title}</span>`);
     $("#song-selection-artist").empty().append(`<span class="text-mycolor-4">${song_details.artist}</span>`);
     $("#song-selection-album").empty().append(`<span class="text-mycolor-4">${song_details.album_name}</span>`);
     $("#song-adding-img").attr("src", song_details.album_cover);
+    options.body = formdata;
+    return;
 };
+
 
 song_add_search = document.getElementById("song-add-search");
 if (song_add_search) {
@@ -204,11 +222,31 @@ if (song_add_search) {
         return;
     }
     song_add_search.addEventListener("input", handleAddSongSearch);
+
 };
 
 
 
+const upload_btn = document.getElementById("upload-song-btn");
 
+upload_btn.addEventListener(("click"),(event) => {
+    console.log("hello upload song");
 
+    fetch("/music/upload",options).then((response)=>{
+        return response.json();
+    }).then(response=>{
+        console.log(response);
+        myalert(response.message,response.status)
+        $("#song-adding-interface").toggleClass("z-10");
+        $("#song-adding-interface").toggleClass("z-40");
+        $("#song-adding-notice").toggleClass("z-20");
+        $("#song-adding-notice").toggleClass("z-50");
+        $("#song-confirmation").toggleClass("opacity-0");
+        $("#song-adding-notice").toggleClass("opacity-100");
+        $("#song-adding-img").attr("src", defaultAddImg);
+        song_add_interface_btn.style.transform = `rotate(${rotate(45)}deg)`;
+        file = document.getElementById("song-file").value = "";
+    });
+});
 
 /******j********************************************************************************** */
