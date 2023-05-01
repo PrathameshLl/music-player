@@ -6,10 +6,16 @@ from django.contrib.auth.models import User
 class Artist(models.Model):
     name = models.CharField(max_length=500) 
 
+    def __str__(self):
+        return f"{self.name}"
+
 class Album(models.Model):
     name = models.CharField(max_length=500)
     artist = models.ForeignKey(Artist,related_name="albums",on_delete=models.CASCADE)
     release_date = models.DateField()
+
+    def __str__(self):
+        return f"{self.name} by {self.artist.name}"
 
 
 class Song(models.Model):
@@ -19,6 +25,9 @@ class Song(models.Model):
     artist =  models.ForeignKey(Artist,related_name="songs",on_delete=models.CASCADE)
     album = models.ForeignKey(Album,related_name="albums",on_delete=models.CASCADE)
     published = models.ForeignKey(User,related_name="songs",on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"{self.name} by {self.artist.name}"
 
 
 

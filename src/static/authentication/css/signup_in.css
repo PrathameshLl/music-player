@@ -1,92 +1,101 @@
 :root {
-    font-size: 100%;
-    font-size: 16px;
     line-height: 1.5;
-    --primary-blue: #233975;
+    --primary-blue: #146eb4;
 }
-body {
-    padding: 0%;
-    margin: 0%;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 500;
-    box-sizing: border-box;
-}
+
+
+
 h1 {
     font-size: 2.25rem;
     font-weight: 700;
 }
-h2 {
-    font-size: 1.5rem;
-    font-weight: 700;
-}
+
 a {
     text-decoration: none;
-    color: var(--primary-blue);
+    color: white;
 }
+
 a:hover {
+    color: var(--primary-blue);
     text-decoration: underline;
 }
+
 .small {
     font-size: 80%;
     text-align: center;
 }
+
 .split-screen {
     min-height: 100vh;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 10px;
     align-items: center;
 }
-.left{
+
+.left {
     height: 200px;
 }
-.left, .right {
+
+.left,
+.right {
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.left {
-    background: linear-gradient(rgba(0, 0, 0,), rgba(0, 0, 0, 0.5)),url('weeknd.jpg');
-    background-size: cover;
-}
+
+
 .left .copy {
-    color: white;
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    color: white;
+    font-size: 1.4rem;
+    text-shadow: black;
 }
+
 .left p {
     font-weight: 400;
 }
+
 .right .copy {
-    color: black;
+    color: white;
     text-align: center;
 }
+
 .right .copy p {
     margin: 1.5em 0;
     font-size: 0.875rem;
 }
+
 .right form {
     width: 328px;
 }
-form input{
+
+form input {
     display: block;
+    color: white;
     width: 100%;
     height: 30px;
     padding: 10px;
     box-sizing: border-box;
     border-radius: 8px;
-    border: 1px solid #c4c4c4;
     padding: lem;
     margin-bottom: 1.25rem;
     font-size: 0.875rem;
 }
+
+form input:focus {
+    outline: none;
+}
+
 label {
+    color: white;
     display: block;
     margin-bottom: 0.5rem;
     font-size: 0.75;
 }
-
 
 
 .checkbox-container input {
@@ -94,92 +103,81 @@ label {
     opacity: 0;
     cursor: pointer;
     height: 0;
-    
     width: 0;
 }
+
 .checkbox-container {
     display: flex;
     position: relative;
-    padding-left: 2rem;
     cursor: pointer;
     user-select: none;
     margin: 0 0 1.25rem 0;
+    align-items: center;
 }
+
 .checkbox-container input:checked~.checkmark {
     background-color: var(--primary-blue);
     border: 1px solid var(--primary-blue);
 }
+
 .checkmark {
-    position: absolute;
-    width: 24px;
-    height: 24px;
+    width: 16px;
+    height: 16px;
     background: white;
-    border: 1px solid #c4c4c4;
     border-radius: 2px;
-    top: -4px;
-    left: 0;
 }
-.checkmark:after {
-    content: "";
-    position: absolute;
-    display: none;
-}
-.checkbox-container input:checked~.checkmark:after {
-    display: block;
-}
-.checkbox-container .checkmark:after {
-    border: solid white;
-    border-width: 0 3px 3px 0;
-    width: 5px;
-    height: 10px;
-    left: 8px;
-    top: 4px;
-    transform: rotate(45deg);
-}
+
 .signup-btn {
     display: block;
     width: 100%;
-    background: var(--primary-blue);
-    color: white;
     font-weight: 700;
     border: none;
-    padding: 1rem;
+    padding: 0.60rem;
     border-radius: 8px;
-    font-size: 0.75rem;
+    font-size: 1rem;
     text-transform: uppercase;
     letter-spacing: 0.5px;
 }
+
 .signup-btn:hover {
-    background: #2c4893;
+    background: var(--primary-blue);
     cursor: pointer;
 }
-@media screen and (max-width: 900px) {
+
+#tagline{
+    font-style: bold;
+    font-size: 1.7rem;
+}
+
+@media screen and (max-width: 740px) {
     .split-screen {
         display: grid;
         grid-template-columns: 1fr;
-    }
-    .left
-    .right {
-        display: flex;
-        width: 50%;
-        height: auto;
+        grid-template-rows: 1fr 3fr;
     }
 
+    .gradient-mask {
+        mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1.0) 10%, transparent 100%);
+    }
 }
 
-.py{
-   padding-top: 20px;
+.gradient-mask {
+    mask-image: linear-gradient(to right, rgba(0, 0, 0, 1.0) 10%, transparent 100%);
 }
 
-.copy h1{
-    color: black;
+.py {
+    padding-top: 20px;
 }
 
-.email{
-   width: 100%;
+.copy h1 {
+    color: white;
 }
 
-.cta{
-    display:flex;
+.email {
+    width: 100%;
+}
+
+.cta {
+    display: flex;
     align-items: center;
 }

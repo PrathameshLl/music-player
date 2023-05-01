@@ -1,0 +1,1 @@
+// $("#left-section").css("background-image",`url(${image_url})`);
