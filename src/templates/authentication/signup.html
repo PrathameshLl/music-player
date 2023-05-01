@@ -23,7 +23,7 @@
 		<div id="left-section" class="relative left h-full object-cover">
 			<img src="{% static 'authentication/images/weeknd.jpg' %}"
 				class="absolute -z-10 gradient-mask  w-full object-cover h-full" alt="">
-			<section id="tagline" class="copy font-bold">
+			<section id="tagline" class="copy ">
 				<div class="text-center">
 					Dive into real MUSIC <br>
 					Just blend in 1000+ songs
@@ -35,8 +35,8 @@
 			<form method="post" action="/signupuser">
 
 				{% csrf_token %}
-				<section class="copy">
-					<h2 class="text-3xl my-12">Get Started</h2>
+				<section class="copy my-12">
+					<h2 class="text-3xl">Get Started</h2>
 					<div class="login-container">
 						<p>Already have an acount? 
 							<a href="/signin">
