@@ -9,58 +9,73 @@ h1 {
     font-size: 2.25rem;
     font-weight: 700;
 }
+
 a {
     text-decoration: none;
     color: white;
 }
+
 a:hover {
     color: var(--primary-blue);
     text-decoration: underline;
 }
+
 .small {
     font-size: 80%;
     text-align: center;
 }
+
 .split-screen {
     min-height: 100vh;
     display: grid;
     grid-template-columns: 1fr 1fr;
     align-items: center;
 }
-.left{
+
+.left {
     height: 200px;
 }
-.left, .right {
+
+.left,
+.right {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
+
 .left .copy {
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    color:white;
-    font-size: 1.2rem;
+    color: white;
+    font-size: 1.4rem;
     text-shadow: black;
 }
+
 .left p {
     font-weight: 400;
 }
+
 .right .copy {
     color: white;
     text-align: center;
 }
+
 .right .copy p {
     margin: 1.5em 0;
     font-size: 0.875rem;
 }
+
 .right form {
     width: 328px;
 }
-form input{
+
+form input {
     display: block;
-    color:white;
+    color: white;
     width: 100%;
     height: 30px;
     padding: 10px;
@@ -71,7 +86,7 @@ form input{
     font-size: 0.875rem;
 }
 
-form input:focus{
+form input:focus {
     outline: none;
 }
 
@@ -104,15 +119,17 @@ label {
     background-color: var(--primary-blue);
     border: 1px solid var(--primary-blue);
 }
+
 .checkmark {
     width: 16px;
     height: 16px;
     background: white;
     border-radius: 2px;
 }
+
 .signup-btn {
     display: block;
-    width: 100%; 
+    width: 100%;
     font-weight: 700;
     border: none;
     padding: 0.60rem;
@@ -121,30 +138,46 @@ label {
     text-transform: uppercase;
     letter-spacing: 0.5px;
 }
+
 .signup-btn:hover {
     background: var(--primary-blue);
     cursor: pointer;
 }
-@media screen and (max-width: 900px) {
+
+#tagline{
+    font-style: bold;
+    font-size: 1.7rem;
+}
+
+@media screen and (max-width: 740px) {
     .split-screen {
         display: grid;
         grid-template-columns: 1fr;
+        grid-template-rows: 1fr 3fr;
+    }
+
+    .gradient-mask {
+        mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1.0) 10%, transparent 100%);
     }
 }
 
-.py{
-   padding-top: 20px;
+.gradient-mask {
+    mask-image: linear-gradient(to right, rgba(0, 0, 0, 1.0) 10%, transparent 100%);
 }
 
-.copy h1{
+.py {
+    padding-top: 20px;
+}
+
+.copy h1 {
     color: white;
 }
 
-.email{
-   width: 100%;
+.email {
+    width: 100%;
 }
 
-.cta{
-    display:flex;
+.cta {
+    display: flex;
     align-items: center;
 }
