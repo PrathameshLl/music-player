@@ -9,6 +9,7 @@
     <title>Document</title>
     <link rel="stylesheet" href="{% static 'music_player/css/home.css' %}">
     <link rel="stylesheet" href="{% static 'tailwindcss/music_player.css' %}">
+    <script src="{% static 'music_player/js/utilities.js' %}"></script>
     <script src="{% static 'modules/amplitudejs/amplitude.js' %}"></script>
     <script src="{% static 'modules/howlerjs/howler.js' %}"></script>
     <script src="{% static 'modules/jquery/jquery.js' %}"></script>
@@ -132,7 +133,6 @@
 
     </main>
     {% include 'music_player/music_controller.html' %}
-    <script src="{% static 'music_player/js/utilities.js' %}"></script>
     <script src="{% static 'music_player/js/init_music.js' %}"></script>
     <script src="{% static 'music_player/js/music_operations.js' %}"></script>
     <script src="{% static 'music_player/js/home.js' %}"></script>

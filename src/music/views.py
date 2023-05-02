@@ -33,3 +33,26 @@ def uploadSong(reqeust):
         return HttpResponse(json.dumps({"status":"success","message":"uploaded the song"}),reqeust)
 
     return render(reqeust,"error.html")
+
+
+
+
+def getSongs(request):
+    if request.method =="POST":
+        songs = Song.objects.all()
+        res_songs = []
+        for song in songs:
+            obj = {
+                "id": song.id,
+                "name": song.name,
+                "artist": song.artist,
+                "url": song.file.url,
+                "cover_art_url":song.album.album_art,
+                "album": song.album.name,
+            }
+            res_songs.append(obj)
+
+        print(res_songs)
+        return HttpResponse(json.dumps({"status":"","message":"succefull","songs":res_songs}))
+    return render(request,"error.html")
+
