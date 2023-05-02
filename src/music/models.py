@@ -8,7 +8,7 @@ class Album(models.Model):
     name = models.CharField(max_length=500)
     artist = models.CharField(max_length=500)
     release_date = models.DateField()
-    album_art = models.ImageField(upload_to="album_cover")
+    album_art = models.CharField(max_length=10000)
     def __str__(self):
         return f"{self.name} by {self.artist}"
 

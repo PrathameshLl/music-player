@@ -3,4 +3,5 @@ from . import views;
 
 urlpatterns = [
     path('/upload', views.uploadSong,name="uploadSong"),
+    path('/getSongs', views.getSongs,name="uploadSong"),
 ]
