@@ -15,7 +15,9 @@ def uploadSong(reqeust):
         album_name = reqeust.POST.get("album_name")
         album_cover = reqeust.POST.get("album_cover")
         release_date = reqeust.POST.get("release_date")
-        album_release_date = datetime.strptime(release_date,"%B %d, %Y").date()
+        album_release_date = None
+        if release_date != "null":
+            album_release_date = datetime.strptime(release_date,"%B %d, %Y").date()
 
         if Album.objects.filter(name=album_name,artist=artist_name):
             album = Album.objects.filter(name=album_name,artist=artist_name)[0]
@@ -29,8 +31,15 @@ def uploadSong(reqeust):
             album.save()
             song = Song.objects.create(name=song_title,file=song_file,artist=artist_name,album=album,published=reqeust.user)
             song.save()
-
-        return HttpResponse(json.dumps({"status":"success","message":"uploaded the song"}),reqeust)
+            obj = {
+                "id": song.id,
+                "name": song.name,
+                "artist": song.artist,
+                "url": song.file.url,
+                "cover_art_url":song.album.album_art,
+                "album": song.album.name,
+            }
+        return HttpResponse(json.dumps({"status":"success","message":"uploaded the song","song":obj}),reqeust)
 
     return render(reqeust,"error.html")
 

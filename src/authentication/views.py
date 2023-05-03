@@ -35,7 +35,7 @@ def login_user(reqeust):
             messages.success(reqeust,"login successfully")
 
 
-        return redirect("/")
+    return redirect("/")
 
 
 def signout(reqeust):
