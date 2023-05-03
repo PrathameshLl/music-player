@@ -1,20 +1,24 @@
-console.log("initialize music");
 
+global_songs = [];
 
-fetch("music/getSongs", options).then((response => {
-    return response.json();
-})).then((response => {
+async function fetchMusic() {
+
+    const response =  await fetch("music/getSongs", options).then(response => response.json())
     console.log(response.songs);
-    Amplitude.init({
-        songs: response.songs,
+        global_songs =  response.songs;
 
-        "bindings": {
-            31: "play_pause",
-        }
-    });
+        Amplitude.init({
+            songs: global_songs,
 
+            "bindings": {
+                31: "play_pause",
+            }
+        });
 
-}));
+}
+
+fetchMusic();
+
 
 
 

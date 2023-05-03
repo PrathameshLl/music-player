@@ -231,6 +231,8 @@ const upload_btn = document.getElementById("upload-song-btn");
 
 upload_btn.addEventListener(("click"),(event) => {
     console.log("hello upload song");
+    
+    
 
     fetch("/music/upload",options).then((response)=>{
         return response.json();
@@ -246,6 +248,8 @@ upload_btn.addEventListener(("click"),(event) => {
         $("#song-adding-img").attr("src", defaultAddImg);
         song_add_interface_btn.style.transform = `rotate(${rotate(45)}deg)`;
         file = document.getElementById("song-file").value = "";
+
+        fetchMusic();
     });
 });
 

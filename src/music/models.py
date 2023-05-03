@@ -30,6 +30,7 @@ class Playlist(models.Model):
     user = models.ForeignKey(User,related_name="playlists",on_delete=models.CASCADE)
     description = models.CharField(max_length=500)
     cover = models.ImageField(upload_to="playlist_cover",default="playlist_cover/defaultPlaylistCover.jpg")
+    songs = models.ManyToManyField(Song,related_name="playlist_set")
 
 
 
