@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=yes">
     <title>Document</title>
     <link rel="stylesheet" href="{% static 'music_player/css/home.css' %}">
+    <link rel="" href="{% static 'music_player/authentication/css/leftbar.css' %}">
     <link rel="stylesheet" href="{% static 'tailwindcss/music_player.css' %}">
     <script src="{% static 'music_player/js/utilities.js' %}"></script>
     <script src="{% static 'modules/amplitudejs/amplitude.js' %}"></script>
@@ -26,7 +27,7 @@
         <aside class="bg-mycolor-3 p-6 overflow-scroll scrollbar-none flex-col">
 
             <div class="border-b py-1 border-mycolor-1">
-                Home
+                {% include 'music_player/components/leftbar.html' %}
             </div>
 
 
