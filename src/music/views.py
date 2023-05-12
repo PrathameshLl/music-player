@@ -65,3 +65,9 @@ def getSongs(request):
         return HttpResponse(json.dumps({"status":"","message":"succefull","songs":res_songs}))
     return render(request,"error.html")
 
+def createPlaylist(request):
+    if request.method == "POST":
+        body = json.load(request)
+        print(body)
+        return HttpResponse(json.dumps({"status":"","message":"okay testing"}))
+    return render(request,"error.html")

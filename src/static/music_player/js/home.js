@@ -231,6 +231,7 @@ const upload_btn = document.getElementById("upload-song-btn");
 
 upload_btn.addEventListener(("click"),(event) => {
     console.log("hello upload song");
+    options.headers.header = "multipart/form-data";
     
     
 
@@ -255,3 +256,24 @@ upload_btn.addEventListener(("click"),(event) => {
 });
 
 /******j********************************************************************************** */
+
+
+/*******releated to playlist ***** */
+    $("#create-playlist-btn").click((event)=>{
+        $("#add-playlist-input").toggleClass("translate-x-0");
+        $("#add-playlist-input").toggleClass("opacity-100");
+    $("#cancel-playlist-input").toggleClass("hidden");
+    });
+
+    $("#cancel-playlist-input").click((event)=>{
+        $("#add-playlist-input").toggleClass("translate-x-0");
+        $("#add-playlist-input").toggleClass("opacity-100");
+        $("#cancel-playlist-input").toggleClass("hidden");
+    })
+
+
+    $("#playlist-post").click(function(){
+        const playlist_name = $("#playlist-name").val();
+        alert(playlist_name);
+    });
+/************ */
