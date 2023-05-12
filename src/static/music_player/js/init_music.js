@@ -13,6 +13,7 @@ async function fetchMusic() {
             "bindings": {
                 31: "play_pause",
             }
+    
         });
 
 }

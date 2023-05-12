@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 class Album(models.Model):
     name = models.CharField(max_length=500)
     artist = models.CharField(max_length=500)
-    release_date = models.DateField()
+    release_date = models.DateField(null=True,blank=True)
     album_art = models.CharField(max_length=10000)
     def __str__(self):
         return f"{self.name} by {self.artist}"

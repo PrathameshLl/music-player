@@ -249,7 +249,8 @@ upload_btn.addEventListener(("click"),(event) => {
         song_add_interface_btn.style.transform = `rotate(${rotate(45)}deg)`;
         file = document.getElementById("song-file").value = "";
 
-        fetchMusic();
+        console.log(response.song)
+        Amplitude.addSong(response.song)
     });
 });
 
