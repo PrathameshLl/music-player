@@ -168,5 +168,17 @@ def addSongToPlaylist(request):
         song = Song.objects.filter(id = payload["song_id"])[0]
         playlist = Playlist.objects.filter(id = payload["playlist_id"])[0]
         playlist.songs.add(song)
-        return HttpResponse(json.dumps({"message": "hello"}))
+
+        
+        songs = []
+        for song in playlist.songs.all():
+            songs.append({
+                "id": song.id,
+                "name": song.name,
+                "artist": song.artist,
+                "url": song.file.url,
+                "cover":song.album.album_art,
+                "album": song.album.name,
+            })
+        return HttpResponse(json.dumps(songs))
     return render(request,"error.html")

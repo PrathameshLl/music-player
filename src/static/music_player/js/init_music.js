@@ -41,7 +41,6 @@ async function initPlaylist_list() {
 async function initPlaylist() {
     options.body = ""
     const resposnse = await fetch("music/getplaylists", options).then(response => response.json());
-    console.log("helllllllllllllllllllllllljj");
     console.log(resposnse);
    
     return resposnse

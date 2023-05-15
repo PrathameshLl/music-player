@@ -259,6 +259,7 @@ upload_btn.addEventListener(("click"), (event) => {
 
 
 /*******releated to playlist ***** */
+
 $("#create-playlist-btn").click((event) => {
     $("#add-playlist-input").toggleClass("translate-x-0");
     $("#add-playlist-input").toggleClass("opacity-100");
@@ -273,7 +274,7 @@ $("#cancel-playlist-input").click((event) => {
 });
 
 
-$("#playlist-post").click(function() {
+$("#playlist-post").click(function () {
     const playlist_name = $("#playlist-name").val();
     if (playlist_name.length === 0) {
         myalert("please add playlist name", "failed");
@@ -301,7 +302,7 @@ $("#playlist-post").click(function() {
         $("#add-playlist-input").toggleClass("translate-x-0");
         $("#add-playlist-input").toggleClass("opacity-100");
         $("#cancel-playlist-input").toggleClass("hidden");
-        $("#aside-playlist-list").append(`<li class="playlist-name-btn hover:text-mycolor-4 p-1" data-id=${response.playlist_id.id}> ${response.playlist_name} </li>`);
+        $("#aside-playlist-list").append(`<li class="playlist-name-btn hover:text-mycolor-4 p-1" data-id=${response.playlist_id}> ${response.playlist_name} </li>`);
         $("#playlist-name").val("");
 
 
@@ -336,16 +337,16 @@ document.querySelector("#add-playlist-song-input").addEventListener("input", (ev
             mode: 'same-origin',
             body: search_query,
         })
-        .then(response => {
-            return response.json()
-        })
+        .then(response => response.json())
         .then(response => {
             response.forEach(song => {
                 $("#playlist-add-song-result").append(`<li class="playlist-add-song-item px-1 py-1 hover:bg-mycolor-4" data-id=${song.id} > ${song.name} by ${song.artist} </li>`);
             });
 
-            $(".playlist-add-song-item").click(event => {
+            $(".playlist-add-song-item").click(async function (event) {
+                $("#playlist-add-song-result").empty();
                 const playlist_id = $("#playlist-add-song-result").data("id");
+                console.log(event.target.dataset);
                 payload = {
                     "song_id": event.target.dataset.id,
                     "playlist_id": playlist_id,
@@ -359,8 +360,14 @@ document.querySelector("#add-playlist-song-input").addEventListener("input", (ev
                         body: JSON.stringify(payload),
                     }).then(response => response.json())
                     .then(response => {
-                        console.log(response);
-                    })
+
+                        myalert("song added in playlist");
+                
+                        $("#playlist-songs").empty();
+                        location.reload();
+                        
+                        
+                    });
             });
         });
 });

@@ -70,8 +70,8 @@ function updatePlaylistPage(playlist_id) {
             $("#playlist-image").attr("src", response.cover);
             $("#playlist-page-description").text(response.description);
             $("#playlist-add-song-result").data("id", response.id)
-
-            response.songs.forEach((song) => {
+            $("#playlist-play-btn").attr("data-amplitude-playlist",response.id);
+            response.songs.forEach((song,index) => {
                 const element = `
                     <div class="py-3 border-b border-mycolor2-2 px-1 flex gap-4">
                         <img class="basis-[8%]" src="${song.cover}">
@@ -79,13 +79,15 @@ function updatePlaylistPage(playlist_id) {
                             <div> ${song.name} </div>
                             <div> ${song.artist} </div>
                         </div>
-                        <div>
-                            <span class="amplitude-play" data-amplitude-song-index=${song.id} data-amplitude-playlist=${response.id}>press me</span>
+                        <div id="playlist-play-btn-${index}" >
+                        <span class="amplitude-play" data-amplitude-song-index="${index}" data-amplitude-playlist=${response.id}>press</span>
                         </div>
                     </div>
                 `;
-                $("#playlist-songs").append(element)
+                $("#playlist-songs").append(element);
+                initMusic();
             })
+           
 
         });
 
