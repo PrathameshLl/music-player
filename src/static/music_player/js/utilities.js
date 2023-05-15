@@ -70,8 +70,8 @@ function updatePlaylistPage(playlist_id) {
             $("#playlist-image").attr("src", response.cover);
             $("#playlist-page-description").text(response.description);
             $("#playlist-add-song-result").data("id", response.id)
-            $("#playlist-play-btn").attr("data-amplitude-playlist",response.id);
-            response.songs.forEach((song,index) => {
+            $("#playlist-play-btn").attr("data-amplitude-playlist", response.id);
+            response.songs.forEach((song, index) => {
                 const element = `
                     <div class="py-3 border-b border-mycolor2-2 px-1 flex gap-4">
                         <img class="basis-[8%]" src="${song.cover}">
@@ -79,18 +79,29 @@ function updatePlaylistPage(playlist_id) {
                             <div> ${song.name} </div>
                             <div> ${song.artist} </div>
                         </div>
-                        <div id="playlist-play-btn-${index}" >
-                        <span class="amplitude-play" data-amplitude-song-index="${index}" data-amplitude-playlist=${response.id}>press</span>
+                        <div " >
+                        <span class="amplitude-play-pause playlist-play-btn" data-amplitude-song-index="${index}" data-amplitude-playlist=${response.id}>press</span>
                         </div>
                     </div>
                 `;
                 $("#playlist-songs").append(element);
+       
                 initMusic();
             })
-           
 
+            $(".playlist-play-btn").click((event) => {
+                console.log("hiiiii")
+                const playBtn = document.getElementById("play-btn");
+                const pauseBtn = document.getElementById("pause-btn");
+                togglePlayPause(playBtn,pauseBtn);
+            });
         });
 
 
     return;
 }
+
+function togglePlayPause(playBtn, pauseBtn) {
+    playBtn.classList.toggle("hidden");
+    pauseBtn.classList.toggle("hidden");
+};

@@ -362,12 +362,8 @@ document.querySelector("#add-playlist-song-input").addEventListener("input", (ev
                     .then(response => {
 
                         myalert("song added in playlist");
-                
-                        $("#playlist-songs").empty();
                         location.reload();
-                        
-                        
-                    });
+                    })
             });
         });
 });
