@@ -778,40 +778,16 @@ video {
   flex-grow: 0;
 }
 
+.basis-\[6\%\] {
+  flex-basis: 6%;
+}
+
 .basis-full {
   flex-basis: 100%;
 }
 
-.basis-2\/4 {
-  flex-basis: 50%;
-}
-
-.basis-4\/5 {
-  flex-basis: 80%;
-}
-
-.basis-10\/12 {
-  flex-basis: 83.333333%;
-}
-
-.basis-\[80\%\] {
-  flex-basis: 80%;
-}
-
-.basis-\[20\%\] {
-  flex-basis: 20%;
-}
-
-.basis-\[10\%\] {
-  flex-basis: 10%;
-}
-
 .basis-\[5\%\] {
   flex-basis: 5%;
-}
-
-.basis-\[8\%\] {
-  flex-basis: 8%;
 }
 
 .-translate-x-\[110\%\] {
@@ -1108,14 +1084,14 @@ video {
   padding-bottom: 6rem;
 }
 
-.py-4 {
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-}
-
 .py-3 {
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
+}
+
+.py-4 {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 }
 
 .pb-2 {

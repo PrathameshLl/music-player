@@ -73,19 +73,27 @@ function updatePlaylistPage(playlist_id) {
             $("#playlist-play-btn").attr("data-amplitude-playlist", response.id);
             response.songs.forEach((song, index) => {
                 const element = `
-                    <div class="py-3 border-b border-mycolor2-2 px-1 flex gap-4">
-                        <img class="basis-[8%]" src="${song.cover}">
+                    <div class="py-3 border-b border-mycolor2-2 px-1 flex justify-center gap-4">
+                        <img class="basis-[5%]" src="${song.cover}">
                         <div class="basis-full">
                             <div> ${song.name} </div>
                             <div> ${song.artist} </div>
                         </div>
-                        <div " >
-                        <span class="amplitude-play-pause playlist-play-btn" data-amplitude-song-index="${index}" data-amplitude-playlist=${response.id}>press</span>
+                        <div  >
+                            <div class="amplitude-play-pause playlist-play-btn bg-mycolor-4 p-2 rounded-full" data-amplitude-song-index="${index}" data-amplitude-playlist=${response.id}>
+                                <svg id="playlist-specific-song-play-icon-${index}" data-id="${index}" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.348a1.125 1.125 0 010 1.971l-11.54 6.347a1.125 1.125 0 01-1.667-.985V5.653z" />
+                                </svg>
+                                <svg id="playlist-specific-song-pause-icon-${index}" data-id="${index}" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 hidden">
+                                  <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 5.25v13.5m-7.5-13.5v13.5" />
+                                </svg>
+
+                            </div>
                         </div>
                     </div>
                 `;
                 $("#playlist-songs").append(element);
-       
+
                 initMusic();
             })
 
@@ -93,7 +101,13 @@ function updatePlaylistPage(playlist_id) {
                 console.log("hiiiii")
                 const playBtn = document.getElementById("play-btn");
                 const pauseBtn = document.getElementById("pause-btn");
-                togglePlayPause(playBtn,pauseBtn);
+                togglePlayPause(playBtn, pauseBtn);
+                const playlistPlayBtn = document.getElementById("playlist-specific-song-play-icon-" + event.target.dataset.id);
+                const playlistPauseBtn = document.getElementById("playlist-specific-song-pause-icon-" + event.target.dataset.id);
+                console.log("hiiiiiiii", playlistPauseBtn);
+                console.log(playlistPlayBtn);
+                if (playlistPauseBtn && playlistPauseBtn)
+                    togglePlayPause(playlistPauseBtn, playlistPlayBtn);
             });
         });
 
