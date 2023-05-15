@@ -2,17 +2,19 @@ global_songs = [];
 
 async function initMusic() {
 
-    const response = await fetch("music/getSongs", options).then(response => response.json())
-    console.log(response.songs);
+    const response = await fetch("music/getSongs", options).then(response => response.json());
+    const playlist = await initPlaylist();
+    console.log(playlist)
     global_songs = response.songs;
-
+    let playist = {}
     Amplitude.init({
 
         songs: global_songs,
 
-        playlists: initPlaylist()
+        playlists: playlist 
 
     });
+    
 
 }
 
@@ -39,7 +41,9 @@ async function initPlaylist_list() {
 async function initPlaylist() {
     options.body = ""
     const resposnse = await fetch("music/getplaylists", options).then(response => response.json());
+    console.log("helllllllllllllllllllllllljj");
     console.log(resposnse);
+   
     return resposnse
 }
 

@@ -97,7 +97,14 @@ def getPlaylists(request):
         for playlist in playlists:
             songs = []
             for song in playlist.songs.all():
-                songs.append(song.id)
+                songs.append({
+                  "id": song.id,
+                "name": song.name,
+                "artist": song.artist,
+                "url": song.file.url,
+                "cover_art_url":song.album.album_art,
+                "album": song.album.name,
+            })
             response[playlist.id] = {
                 "title": playlist.name,
                 "songs": songs
@@ -115,11 +122,13 @@ def getPlaylist(request):
         playlist = Playlist.objects.filter(id=song_id)[0]
         songs = []
         for song in playlist.songs.all():
-            songs.append({
-                "id":song.id,
-                "name":song.name,
-                "artist":song.artist,
-                "cover": song.album.album_art,
+               songs.append({
+                "id": song.id,
+                "name": song.name,
+                "artist": song.artist,
+                "url": song.file.url,
+                "cover":song.album.album_art,
+                "album": song.album.name,
             })
 
         playlist = {
