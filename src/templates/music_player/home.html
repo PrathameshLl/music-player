@@ -21,112 +21,17 @@
 
 <body class="min-h-screen  overflow-x-hidden bg-mycolor-3 text-mycolor2-4 font-myfontreg ">
 
-    <main class="grid grid-cols-[1fr,6fr] gap-4 h-screen select-none">
+    <main class="grid grid-cols-[auto,1fr] gap-4 h-screen select-none">
 
-        <aside class="bg-mycolor-3 p-6 overflow-scroll scrollbar-none flex-col">
-
-            <div class="border-b py-1 border-mycolor-1">
-                Home
-            </div>
-
-
-        </aside>
-
+        {% include 'music_player/aside.html' %}
 
 
         <section
             class="relative bg-gradient-to-tl p-4 flex flex-col gap-4 scrollbar-none from-mycolor-3 to-mycolor-2 overflow-y-scroll overflow-x-hidden">
             {% include 'music_player/components/page_controller.html' %}
-            <div id="home-page">
-                <div id="intro-component" class="p-10 live-content">
 
-                    <div class="intro-user-greeting my-6">
-                        <h1 class="text-5xl">Welcome {{user.username}}</h1>
-                    </div>
-
-                    <div id="song-add">
-                        <h2 class="my-4"> Add Song </h2>
-
-                        <div id="add-song-controller" class="flex flex-row gap-4">
-
-                            <div class="w-40 h-40 shrink-0 flex  justify-center items-center relative ">
-                                <img id="song-adding-img" src="{% static 'music_player/images/addMusic.png' %}"
-                                    class="object-contain">
-                                <svg id="toggle-add-song-btn" xmlns="http://www.w3.org/2000/svg" fill="none"
-                                    viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" translate="rotate(0)"
-                                    class="w-14 h-14 transition-transform   duration-300 stroke-mycolor-3 hover:stroke-mycolor-4 pointer-events-auto  absolute">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="m12 4.5v15m7.5-7.5h-15" />
-                                </svg>
-                            </div>
-
-                            <div class="basis-full relative">
-
-                                <div id="song-adding-notice"
-                                    class="duration-500 w-full absolute z-50 overflow-hidden opacity-0 opacity-100">
-                                    <p class="my-2">
-                                        Your Favroite Song Not Available :( <br>
-                                        No Problem add Once Listen Anytime <br>
-
-                                    </p>
-                                    <p class="opacity-100">
-                                        <span class="text-mycolor-5">Note</span>: Any Song you add On this Site is Added
-                                        without Right Holder Permission.<br>
-                                        This is Non-Commercial Project and just For Education Purpose Thank you
-                                    </p>
-
-
-                                </div>
-
-                                <div id="song-adding-interface"
-                                    class="flex  z-40 absolute flex-row h-full w-full duration-500 opacity-0">
-                                    <div class="shrink-0 grow-0 h-full">
-                                        <div class="flex items-center gap-2">
-                                            <label class="">Search Song</label> <input id="song-add-search"
-                                                class="rounded-full p-1 px-3 bg-mycolor2-2" type="text"
-                                                name="song_search">
-                                            <br>
-                                        </div>
-                                        <div class="my-4">
-                                            <label class="">Add Song File</label>
-                                            <input id="song-file" type="file" name="song_file" id="">
-                                        </div>
-                                        <div>Search Eg: "song name" by "artist_name" </div>
-                                    </div>
-
-                                    <div id="song-results"
-                                        class="border-l border-mycolor2-3 w-full h-full px-4 overflow-scroll scrollbar-none">
-                                    </div>
-                                </div>
-                                <div id="song-confirmation"
-                                    class="absolute z-30  opacity-0 duration-500 flex gap-1 flex-col">
-                                    <div>
-                                        Song Name: <span id="song-selection-title" class="text-mycolor-4"></span>
-
-                                    </div>
-                                    <div>
-                                        Artist: <span id="song-selection-artist" class="text-mycolor-4"></span>
-                                    </div>
-                                    <div>
-                                        Album: <span id="song-selection-album" class="text-mycolor-4"></span>
-                                    </div>
-                                    <div>
-                                        File Type: mp3
-                                    </div>
-
-                                    <button id="upload-song-btn" name="file" 
-                                        class="bg-mycolor-4 py-1 my-2 rounded-md hover:opacity-90 text-center"
-                                        value="upload"> Upload </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div id="playlist-compo" class="">
-                </div>
-
-            </div>
-
+            {% include 'music_player/pages/home_page.html' %}
+            {% include 'music_player/pages/playlist_page.html' %}
 
             {% include 'music_player/components/alert.html' %}
         </section>

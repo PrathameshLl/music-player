@@ -1,0 +1,33 @@
+{% load static %}
+<div id="playlist-page" class="hidden py-24 px-6">
+
+    <div id="playlist-disc" class="grid grid-cols-[1fr,5fr] gap-4">
+        <div>
+            <img id="playlist-image" src="{% static 'defaultPlaylistCover.jpg'%}">
+        </div>
+        <div id="playlist-description" class="flex flex-col gap-4">
+            <div id="playlist-page-name" class="text-5xl">My favs 2022 </div>
+            <div id="playlist-page-description" class="text-gray-300">
+                A new gen of bands gazing at their pedals, while soaring celestially-high Winter on cover
+            </div>
+            <div class="flex gap-2">
+                <span class="p-2 bg-mycolor-4 w-fit rounded-md self-start">Add Songs </span>
+                <div class=relative>
+                    <input id="add-playlist-song-input" type="text" class="text-mycolor-2 focus:outline-none rounded-md p-2 w-full ">
+                    <div id="updated-song-list" class="bg-mycolor2-1 absolute">
+                        <ul id="playlist-add-song-result" class="">
+                            <!-- <li class="px-1 py-1 hover:bg-mycolor-4 hidden">Cherry-coloured Funk by cockteau twins </li> -->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <span class="amplitude-play" data-amplitude-playlist=12> press</span>
+
+        </div>
+    </div>
+
+    <section id="playlist-songs" class="my-12">
+    </section>
+
+</div>
