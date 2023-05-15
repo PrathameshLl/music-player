@@ -67,7 +67,7 @@ unmutebtn.addEventListener("click", (event) => {
 
 /***********************************js relatied to add song **************************************** */
 
-function setCardOrder(card){
+function setCardOrder(card) {
     return;
 }
 
@@ -118,7 +118,7 @@ async function handleSongAdd(event) {
         return;
     }
     if (file_name.split(".").pop() !== "mp3") {
-        myalert("please put a music file","failed");
+        myalert("please put a music file", "failed");
         return;
     }
 
@@ -143,12 +143,12 @@ async function handleSongAdd(event) {
         file: file
     };
 
-    formdata.append("file",file);
-    formdata.append("title",song_details.title);
-    formdata.append("artist_name",song_details.artist);
-    formdata.append("album_name",song_details.album_name);
-    formdata.append("album_cover",song_details.album_cover);
-    formdata.append("release_date",song_details.release_date);
+    formdata.append("file", file);
+    formdata.append("title", song_details.title);
+    formdata.append("artist_name", song_details.artist);
+    formdata.append("album_name", song_details.album_name);
+    formdata.append("album_cover", song_details.album_cover);
+    formdata.append("release_date", song_details.release_date);
 
 
     $("#song-selection-title").empty().append(`<span class="text-mycolor-4" >${song_details.title}</span>`);
@@ -175,12 +175,13 @@ if (song_add_search) {
 
     */
     let global_state = 0
+
     function handleAddSongSearch(event) {
 
         function getSearchSongRequest() {
             global_state += 1;
             let local_state = global_state;
-            
+
             function onAddSearch() {
                 setTimeout(() => {
                     if (local_state === global_state) {
@@ -210,14 +211,14 @@ if (song_add_search) {
 
                         });
                     }
-                },500);
+                }, 500);
 
             };
 
             return onAddSearch
         }
 
-        requestSong = getSearchSongRequest(); 
+        requestSong = getSearchSongRequest();
         requestSong();
         return;
     }
@@ -229,17 +230,15 @@ if (song_add_search) {
 
 const upload_btn = document.getElementById("upload-song-btn");
 
-upload_btn.addEventListener(("click"),(event) => {
-    console.log("hello upload song");
-    options.headers.header = "multipart/form-data";
-    
-    
+upload_btn.addEventListener(("click"), (event) => {
 
-    fetch("/music/upload",options).then((response)=>{
+
+
+    fetch("/music/upload", options).then((response) => {
         return response.json();
-    }).then(response=>{
+    }).then(response => {
         console.log(response);
-        myalert(response.message,response.status)
+        myalert(response.message, response.status)
         $("#song-adding-interface").toggleClass("z-10");
         $("#song-adding-interface").toggleClass("z-40");
         $("#song-adding-notice").toggleClass("z-20");
@@ -251,7 +250,8 @@ upload_btn.addEventListener(("click"),(event) => {
         file = document.getElementById("song-file").value = "";
 
         console.log(response.song)
-        Amplitude.addSong(response.song)
+        if (response.song)
+            Amplitude.addSong(response.song)
     });
 });
 
@@ -259,21 +259,110 @@ upload_btn.addEventListener(("click"),(event) => {
 
 
 /*******releated to playlist ***** */
-    $("#create-playlist-btn").click((event)=>{
-        $("#add-playlist-input").toggleClass("translate-x-0");
-        $("#add-playlist-input").toggleClass("opacity-100");
+$("#create-playlist-btn").click((event) => {
+    $("#add-playlist-input").toggleClass("translate-x-0");
+    $("#add-playlist-input").toggleClass("opacity-100");
     $("#cancel-playlist-input").toggleClass("hidden");
+});
+
+$("#cancel-playlist-input").click((event) => {
+    $("#add-playlist-input").toggleClass("translate-x-0");
+    $("#add-playlist-input").toggleClass("opacity-100");
+    $("#cancel-playlist-input").toggleClass("hidden");
+    $("#playlist-name").val("");
+});
+
+
+$("#playlist-post").click(function() {
+    const playlist_name = $("#playlist-name").val();
+    if (playlist_name.length === 0) {
+        myalert("please add playlist name", "failed");
+        return;
+    }
+
+    const new_options = {
+        method: 'POST',
+        headers: {
+            'content-type': "application/json",
+            'X-CSRFToken': getCookie('csrftoken'),
+        },
+        mode: 'same-origin',
+        body: "",
+    }
+    new_options.body = JSON.stringify({
+        "name": playlist_name
     });
 
-    $("#cancel-playlist-input").click((event)=>{
+    fetch("/music/createplaylist", new_options).then(response => {
+        return response.json();
+    }).then(response => {
+        console.log(response);
+        myalert(response.message, response.status);
         $("#add-playlist-input").toggleClass("translate-x-0");
         $("#add-playlist-input").toggleClass("opacity-100");
         $("#cancel-playlist-input").toggleClass("hidden");
-    })
+        $("#aside-playlist-list").append(`<li class="playlist-name-btn hover:text-mycolor-4 p-1" data-id=${response.playlist_id.id}> ${response.playlist_name} </li>`);
+        $("#playlist-name").val("");
 
 
-    $("#playlist-post").click(function(){
-        const playlist_name = $("#playlist-name").val();
-        alert(playlist_name);
+
+        $(".playlist-name-btn").click((event) => {
+
+            if ($("#playlist-page").hasClass("hidden")) {
+                $("#home-page").toggleClass("hidden");
+                $("#playlist-page").toggleClass("hidden");
+            }
+            updatePlaylistPage(event.target.dataset.id);
+        })
+        return;
     });
+});
+
+document.querySelector("#add-playlist-song-input").addEventListener("input", (event) => {
+    $("#playlist-add-song-result").empty();
+    if (event.target.value.length === 0) {
+        return;
+    };
+
+    const search_query = JSON.stringify({
+        "song_name": event.target.value
+    });
+    fetch("music/searchsongs", {
+            method: 'POST',
+            headers: {
+                'content-type': "application/json",
+                'X-CSRFToken': getCookie('csrftoken'),
+            },
+            mode: 'same-origin',
+            body: search_query,
+        })
+        .then(response => {
+            return response.json()
+        })
+        .then(response => {
+            response.forEach(song => {
+                $("#playlist-add-song-result").append(`<li class="playlist-add-song-item px-1 py-1 hover:bg-mycolor-4" data-id=${song.id} > ${song.name} by ${song.artist} </li>`);
+            });
+
+            $(".playlist-add-song-item").click(event => {
+                const playlist_id = $("#playlist-add-song-result").data("id");
+                payload = {
+                    "song_id": event.target.dataset.id,
+                    "playlist_id": playlist_id,
+                }
+                fetch("/music/addsongtoplaylist", {
+                        method: 'POST',
+                        headers: {
+                            'X-CSRFToken': getCookie('csrftoken'),
+                        },
+                        mode: 'same-origin',
+                        body: JSON.stringify(payload),
+                    }).then(response => response.json())
+                    .then(response => {
+                        console.log(response);
+                    })
+            });
+        });
+});
+
 /************ */

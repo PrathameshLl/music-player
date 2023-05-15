@@ -28,9 +28,13 @@ class Song(models.Model):
 class Playlist(models.Model):
     name = models.CharField(max_length=500)
     user = models.ForeignKey(User,related_name="playlists",on_delete=models.CASCADE)
-    description = models.CharField(max_length=500)
+    description = models.CharField(max_length=500,blank=True,null=True)
     cover = models.ImageField(upload_to="playlist_cover",default="playlist_cover/defaultPlaylistCover.jpg")
     songs = models.ManyToManyField(Song,related_name="playlist_set")
+
+
+    def __str__(self):
+        return f"{self.name} by {self.user.username}"
 
 
 

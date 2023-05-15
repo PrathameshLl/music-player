@@ -1,5 +1,5 @@
 from django.shortcuts import render, HttpResponse
-from .models import Song, Album 
+from .models import Song, Album,Playlist
 from datetime import datetime
 import json
 
@@ -61,13 +61,103 @@ def getSongs(request):
             }
             res_songs.append(obj)
 
-        print(res_songs)
         return HttpResponse(json.dumps({"status":"","message":"succefull","songs":res_songs}))
     return render(request,"error.html")
 
 def createPlaylist(request):
     if request.method == "POST":
         body = json.load(request)
-        print(body)
-        return HttpResponse(json.dumps({"status":"","message":"okay testing"}))
+        playlist = Playlist.objects.create(name=body["name"],user=request.user)
+        playlist.save()
+        return HttpResponse(json.dumps({"status":"success","message":"playlist created","playlist_name":playlist.name,"playlist_id":playlist.id}),request)
+    return render(request,"error.html")
+
+
+
+def getPlaylistList(request):
+    if request.method == "POST":
+        playlists = Playlist.objects.all()
+
+        response = []
+        for playlist in playlists:
+            response.append({
+                "id":playlist.id,
+                "name": playlist.name,
+                "description": playlist.description,
+            })
+        return HttpResponse(json.dumps(response))
+    return render(request,"error.html")
+
+
+def getPlaylists(request):
+    if request.method == "POST":
+
+        response = {}
+        playlists = Playlist.objects.all()
+        for playlist in playlists:
+            songs = []
+            for song in playlist.songs.all():
+                songs.append(song.id)
+            response[playlist.id] = {
+                "title": playlist.name,
+                "songs": songs
+            }
+            
+        return HttpResponse(json.dumps(response))
+
+    return render(request,"error.html")
+
+
+
+def getPlaylist(request):
+    if request.method == "POST":
+        song_id = json.load(request)["song_id"]
+        playlist = Playlist.objects.filter(id=song_id)[0]
+        songs = []
+        for song in playlist.songs.all():
+            songs.append({
+                "id":song.id,
+                "name":song.name,
+                "artist":song.artist,
+                "cover": song.album.album_art,
+            })
+
+        playlist = {
+            "id":playlist.id,
+            "name": playlist.name,
+            "description": playlist.description,
+            "cover": playlist.cover.url,
+            "songs": songs
+        }
+        return HttpResponse(json.dumps(playlist))
+    return render(request,"error.html")
+
+
+def searchSongs(request):
+
+    if request.method == "POST":
+        payload = json.load(request)
+        print(payload)
+        songs = Song.objects.filter(name__istartswith=payload["song_name"])
+        response_songs = []
+        for song in songs:
+            response_songs.append({
+                "id": song.id,
+                "name": song.name,
+                "artist": song.artist,
+            })
+
+        print(response_songs)
+        return HttpResponse(json.dumps(response_songs))
+
+    return render(request,"error.html")
+
+
+def addSongToPlaylist(request):
+    if request.method == "POST":
+        payload = json.load(request)
+        song = Song.objects.filter(id = payload["song_id"])[0]
+        playlist = Playlist.objects.filter(id = payload["playlist_id"])[0]
+        playlist.songs.add(song)
+        return HttpResponse(json.dumps({"message": "hello"}))
     return render(request,"error.html")

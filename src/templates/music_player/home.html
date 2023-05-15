@@ -21,7 +21,7 @@
 
 <body class="min-h-screen  overflow-x-hidden bg-mycolor-3 text-mycolor2-4 font-myfontreg ">
 
-    <main class="grid grid-cols-[2fr,8fr] gap-4 h-screen select-none">
+    <main class="grid grid-cols-[auto,1fr] gap-4 h-screen select-none">
 
         {% include 'music_player/aside.html' %}
 
@@ -31,6 +31,8 @@
             {% include 'music_player/components/page_controller.html' %}
 
             {% include 'music_player/pages/home_page.html' %}
+            {% include 'music_player/pages/playlist_page.html' %}
+
             {% include 'music_player/components/alert.html' %}
         </section>
 
