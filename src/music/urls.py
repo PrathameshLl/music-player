@@ -10,4 +10,5 @@ urlpatterns = [
     path("getplaylist",views.getPlaylist,name="getPlaylist"),
     path("addsongtoplaylist",views.addSongToPlaylist,name="addSongToPlaylist"),
     path("searchsongs",views.searchSongs,name="searchSongs")
+    # path("/music/playlistpictureupload",views.uploadPlaylistCover,name="")
 ]

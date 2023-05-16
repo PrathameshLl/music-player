@@ -20,16 +20,25 @@
                     </div>
                 </div>
             </div>
+            <div class="flex gap-4">
+                <div id="playlist-play-btn" class="self-start amplitude-play-pause playlist-play-btn bg-mycolor-4 p-3 rounded-full w-fit" data-amplitude-playlist="">
+                    <svg id=playlist-main-pause-icon xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 hidden">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 5.25v13.5m-7.5-13.5v13.5" />
+                    </svg>
 
-            <div id="playlist-play-btn" class="amplitude-play-pause playlist-play-btn bg-mycolor-4 p-3 rounded-full w-fit" data-amplitude-playlist="">
-                <svg id=playlist-main-pause-icon xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 hidden">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 5.25v13.5m-7.5-13.5v13.5" />
-                </svg>
+                    <svg id="playlist-main-play-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.348a1.125 1.125 0 010 1.971l-11.54 6.347a1.125 1.125 0 01-1.667-.985V5.653z" />
+                    </svg>
 
-                <svg id="playlist-main-play-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                        d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.348a1.125 1.125 0 010 1.971l-11.54 6.347a1.125 1.125 0 01-1.667-.985V5.653z" />
-                </svg>
+                </div>
+                <div class="">
+                    <form class="flex gap-1 flex-col" action="/music/playlistpictureupload" method="POST">
+                        <label class="">Upload playlist cover</label><br>
+                        <input type="file" name="" id="">
+                    </form>
+                </div>
+                <button id="sumbit-playlist-pic" class="bg-mycolor-4 w-fit p-3 rounded-md"> add image </button>
 
             </div>
 

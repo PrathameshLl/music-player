@@ -46,7 +46,12 @@ async function initMusic() {
         });
     })
     Object.entries(playlist).forEach((p, index) => {
-        [key, value] = p;
+        description = ""
+        if (p[1].description === "null")
+            description = p[1].description;
+
+
+        const [key, value] = p;
         content = `
         <div class="card">
     <div class="img-holder">
@@ -54,7 +59,7 @@ async function initMusic() {
     </div>
     <div class="text playlist-name-btn" data-id=${p[0]}>
         <h2>${p[1].title}</h2>
-        <p>${p[1].description}</p>
+        <p>${description}</p>
     </div>
     <div class="play-icon">
         <div class="circle">

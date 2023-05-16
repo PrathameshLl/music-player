@@ -50,8 +50,6 @@ const options = {
 
 
 function updatePlaylistPage(playlist_id) {
-    $("#playlist-songs").empty();
-
     payload = {
         "song_id": playlist_id
     };
@@ -69,6 +67,9 @@ function updatePlaylistPage(playlist_id) {
             $("#playlist-page-description").text(response.description);
             $("#playlist-add-song-result").data("id", response.id)
             $("#playlist-play-btn").attr("data-amplitude-playlist", response.id);
+
+
+            $("#playlist-songs").empty();
             response.songs.forEach((song, index) => {
                 const element = `
                     <div class="py-3 border-b border-mycolor2-2 px-1 flex justify-center gap-4">
@@ -95,10 +96,11 @@ function updatePlaylistPage(playlist_id) {
             })
 
             $(".playlist-play-btn").click((event) => {
-                ("hiiiii")
                 const playBtn = document.getElementById("play-btn");
                 const pauseBtn = document.getElementById("pause-btn");
+                console.log(playBtn, pauseBtn)
                 togglePlayPause(playBtn, pauseBtn);
+
                 const playlistPlayBtn = document.getElementById("playlist-specific-song-play-icon-" + event.target.dataset.id);
                 const playlistPauseBtn = document.getElementById("playlist-specific-song-pause-icon-" + event.target.dataset.id);
                 if (playlistPauseBtn && playlistPauseBtn)
@@ -118,6 +120,7 @@ function updatePlaylistPage(playlist_id) {
 }
 
 function togglePlayPause(playBtn, pauseBtn) {
+    console.log("hhhh")
     playBtn.classList.toggle("hidden");
     pauseBtn.classList.toggle("hidden");
 };
