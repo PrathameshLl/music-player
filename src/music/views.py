@@ -107,7 +107,9 @@ def getPlaylists(request):
             })
             response[playlist.id] = {
                 "title": playlist.name,
-                "songs": songs
+                "songs": songs,
+                "description":playlist.description,
+                "cover": playlist.cover.url,
             }
             
         return HttpResponse(json.dumps(response))

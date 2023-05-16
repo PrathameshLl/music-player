@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-{% load static %}
+<!DOCTYPE html> {% load static %}
 <html lang="en">
 
 <head>
@@ -9,11 +8,11 @@
     <title>Document</title>
     <link rel="stylesheet" href="{% static 'music_player/css/home.css' %}">
     <link rel="stylesheet" href="{% static 'tailwindcss/music_player.css' %}">
-    <script src="{% static 'music_player/js/utilities.js' %}"></script>
     <script src="{% static 'modules/amplitudejs/amplitude.js' %}"></script>
+    <script src="{% static 'music_player/js/utilities.js' %}"></script>
     <script src="{% static 'modules/howlerjs/howler.js' %}"></script>
     <script src="{% static 'modules/jquery/jquery.js' %}"></script>
- 
+
     <script>
         const defaultAddImg = "{% static 'music_player/images/addMusic.png' %}";
     </script>
@@ -27,14 +26,8 @@
         {% include 'music_player/aside.html' %}
 
 
-        <section
-            class="relative bg-gradient-to-tl p-4 flex flex-col gap-4 scrollbar-none from-mycolor-3 to-mycolor-2 overflow-y-scroll overflow-x-hidden">
-            {% include 'music_player/components/page_controller.html' %}
-
-            {% include 'music_player/pages/home_page.html' %}
-            {% include 'music_player/pages/playlist_page.html' %}
-
-            {% include 'music_player/components/alert.html' %}
+        <section class="relative bg-gradient-to-tl p-4 flex flex-col gap-4 scrollbar-none from-mycolor-2 to-mycolor-3 overflow-y-scroll overflow-x-hidden">
+            {% include 'music_player/components/page_controller.html' %} {% include 'music_player/pages/home_page.html' %} {% include 'music_player/pages/playlist_page.html' %} {% include 'music_player/pages/global_list.html' %} {% include 'music_player/components/alert.html'%}
         </section>
 
     </main>

@@ -13,6 +13,7 @@ class Album(models.Model):
         return f"{self.name} by {self.artist}"
 
 
+
 class Song(models.Model):
     name = models.CharField(max_length=500)
     file = models.FileField(upload_to="songs")

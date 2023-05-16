@@ -11,9 +11,8 @@
                 A new gen of bands gazing at their pedals, while soaring celestially-high Winter on cover
             </div>
             <div class="flex gap-2">
-                <span class="p-2 bg-mycolor-4 w-fit rounded-md self-start">Add Songs </span>
                 <div class=relative>
-                    <input id="add-playlist-song-input" type="text" class="text-mycolor-2 focus:outline-none rounded-md p-2 w-full ">
+                    <input placeholder="add song into playlist" id="add-playlist-song-input" type="text" class="text-mycolor-2 focus:outline-none rounded-md p-2 w-full ">
                     <div id="updated-song-list" class="bg-mycolor2-1 absolute">
                         <ul id="playlist-add-song-result" class="">
                             <!-- <li class="px-1 py-1 hover:bg-mycolor-4 hidden">Cherry-coloured Funk by cockteau twins </li> -->
@@ -21,7 +20,18 @@
                     </div>
                 </div>
             </div>
-            <span id="playlist-play-btn" class="amplitude-play-pause playlist-play-btn" data-amplitude-playlist="">play playlist</span>
+
+            <div id="playlist-play-btn" class="amplitude-play-pause playlist-play-btn bg-mycolor-4 p-3 rounded-full w-fit" data-amplitude-playlist="">
+                <svg id=playlist-main-pause-icon xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 hidden">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 5.25v13.5m-7.5-13.5v13.5" />
+                </svg>
+
+                <svg id="playlist-main-play-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.348a1.125 1.125 0 010 1.971l-11.54 6.347a1.125 1.125 0 01-1.667-.985V5.653z" />
+                </svg>
+
+            </div>
 
 
 

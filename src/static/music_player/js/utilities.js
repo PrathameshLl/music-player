@@ -51,7 +51,6 @@ const options = {
 
 function updatePlaylistPage(playlist_id) {
     $("#playlist-songs").empty();
-    console.log(playlist_id);
 
     payload = {
         "song_id": playlist_id
@@ -65,7 +64,6 @@ function updatePlaylistPage(playlist_id) {
             body: JSON.stringify(payload),
         }).then(response => response.json())
         .then(response => {
-            console.log(response)
             $("#playlist-page-name").text(response.name);
             $("#playlist-image").attr("src", response.cover);
             $("#playlist-page-description").text(response.description);
@@ -93,21 +91,25 @@ function updatePlaylistPage(playlist_id) {
                     </div>
                 `;
                 $("#playlist-songs").append(element);
-
-                initMusic();
+                Amplitude.bindNewElements();
             })
 
             $(".playlist-play-btn").click((event) => {
-                console.log("hiiiii")
+                ("hiiiii")
                 const playBtn = document.getElementById("play-btn");
                 const pauseBtn = document.getElementById("pause-btn");
                 togglePlayPause(playBtn, pauseBtn);
                 const playlistPlayBtn = document.getElementById("playlist-specific-song-play-icon-" + event.target.dataset.id);
                 const playlistPauseBtn = document.getElementById("playlist-specific-song-pause-icon-" + event.target.dataset.id);
-                console.log("hiiiiiiii", playlistPauseBtn);
-                console.log(playlistPlayBtn);
                 if (playlistPauseBtn && playlistPauseBtn)
                     togglePlayPause(playlistPauseBtn, playlistPlayBtn);
+
+
+                const main_playlist_play_icon = document.getElementById("playlist-main-play-icon");
+                const main_playlist_pause_icon = document.getElementById("playlist-main-pause-icon");
+
+                if (main_playlist_pause_icon && main_playlist_play_icon)
+                    togglePlayPause(main_playlist_pause_icon, main_playlist_play_icon)
             });
         });
 

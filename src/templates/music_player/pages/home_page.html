@@ -1,6 +1,6 @@
 {% load static %}
-<div id="home-page" class="">
-    <div id="intro-component" class="p-10 live-content">
+<div id="home-page" class="p-10 ">
+    <div id="intro-component" class="live-content border-b py-12">
 
         <div class="intro-user-greeting my-6">
             <h1 class="text-5xl">Welcome {{user.username}}</h1>
@@ -70,7 +70,10 @@
         </div>
     </div>
 
-    <div id="playlist-compo" class="">
+    <div id="playlist-compo" class="mt-10 mb-28 ">
+        <h1 class="mb-6 text-3xl col-span-full">Playlists</h1>
+        <div id="playlist-cards" class="grid gap-4 grid-cols-4">
+        </div>
     </div>
 
 </div>

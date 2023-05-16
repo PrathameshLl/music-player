@@ -110,7 +110,6 @@ song_add_interface_btn.addEventListener("click", (event) => {
 
 const formdata = new FormData();
 async function handleSongAdd(event) {
-    console.log("handlesongadd");
 
     var file_name = $("#song-file").val()
     if (file_name == "") {
@@ -237,7 +236,6 @@ upload_btn.addEventListener(("click"), (event) => {
     fetch("/music/upload", options).then((response) => {
         return response.json();
     }).then(response => {
-        console.log(response);
         myalert(response.message, response.status)
         $("#song-adding-interface").toggleClass("z-10");
         $("#song-adding-interface").toggleClass("z-40");
@@ -249,7 +247,6 @@ upload_btn.addEventListener(("click"), (event) => {
         song_add_interface_btn.style.transform = `rotate(${rotate(45)}deg)`;
         file = document.getElementById("song-file").value = "";
 
-        console.log(response.song)
         if (response.song)
             Amplitude.addSong(response.song)
     });
@@ -274,7 +271,7 @@ $("#cancel-playlist-input").click((event) => {
 });
 
 
-$("#playlist-post").click(function () {
+$("#playlist-post").click(function() {
     const playlist_name = $("#playlist-name").val();
     if (playlist_name.length === 0) {
         myalert("please add playlist name", "failed");
@@ -297,7 +294,6 @@ $("#playlist-post").click(function () {
     fetch("/music/createplaylist", new_options).then(response => {
         return response.json();
     }).then(response => {
-        console.log(response);
         myalert(response.message, response.status);
         $("#add-playlist-input").toggleClass("translate-x-0");
         $("#add-playlist-input").toggleClass("opacity-100");
@@ -308,11 +304,10 @@ $("#playlist-post").click(function () {
 
 
         $(".playlist-name-btn").click((event) => {
-
-            if ($("#playlist-page").hasClass("hidden")) {
-                $("#home-page").toggleClass("hidden");
-                $("#playlist-page").toggleClass("hidden");
-            }
+            console.log("hii")
+            $("#home-page").addClass("hidden");
+            $("#playlist-page").removeClass("hidden");
+            $("#global-list-page").addClass("hidden");
             updatePlaylistPage(event.target.dataset.id);
         })
         return;
@@ -343,10 +338,10 @@ document.querySelector("#add-playlist-song-input").addEventListener("input", (ev
                 $("#playlist-add-song-result").append(`<li class="playlist-add-song-item px-1 py-1 hover:bg-mycolor-4" data-id=${song.id} > ${song.name} by ${song.artist} </li>`);
             });
 
-            $(".playlist-add-song-item").click(async function (event) {
+            $(".playlist-add-song-item").click(async function(event) {
                 $("#playlist-add-song-result").empty();
                 const playlist_id = $("#playlist-add-song-result").data("id");
-                console.log(event.target.dataset);
+                (event.target.dataset);
                 payload = {
                     "song_id": event.target.dataset.id,
                     "playlist_id": playlist_id,
@@ -368,4 +363,18 @@ document.querySelector("#add-playlist-song-input").addEventListener("input", (ev
         });
 });
 
-/************ */
+/*****home******* */
+
+$("#home-page")
+
+
+/************global list ************** */
+
+$("#go-to-global-list").click((event) => {
+    ("global");
+    $("#home-page").addClass("hidden");
+    $("#playlist-page").addClass("hidden");
+    $("#global-list-page").removeClass("hidden");
+
+});
+/************************* */
